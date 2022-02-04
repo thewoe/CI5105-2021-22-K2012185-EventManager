@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tugoflaherty.eventmanager;
+package com.tugoflaherty.eventmanager.view;
 
 /**
  *
- * @author tugso
+ * @author tugoflaherty
  */
 public class Dummy {
-    // Do not use - just for fooling GitLab to keep this package
+    //Dummy class to fool git for Viewer package
 }
