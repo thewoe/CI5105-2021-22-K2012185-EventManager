@@ -9,6 +9,7 @@ import com.tugoflaherty.eventmanager.model.Event;
 import com.tugoflaherty.eventmanager.model.EventManager;
 import com.tugoflaherty.eventmanager.model.Item;
 import com.tugoflaherty.eventmanager.model.Organiser;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,11 +42,88 @@ public class EventManagerTest {
         return eventManagerOrganisersList.isEmpty();
     }
     
-        //create series of events, add them to eventmanager events arraylist
-        //create series of items, add them to eventmanager items arraylist
-        //create series of organisers, add them to eventmanager organisers arraylist
-        //check further tests that can be run and implement these
-        //update the functional test plan and UML class diagram
-        //implement second requirement
+    public static boolean testAddEventToEventManagerEventListAllAttributes() {
+        EventManager eventManager = EventManager.getInstance();
+        Organiser davidLivingstone = new Organiser("David","Livingstone");
+        List<Item> items = new ArrayList();
+        items.add(new Item("09:00","Wake up"));
+        items.add(new Item("10:00","Catch the bus"));
+        items.add(new Item("11:00","Arrive at Kingston University"));
+        items.add(new Item("12:00","Teach Programming"));
+        items.add(new Item("17:00","Go home"));
+        Event testEvent = new Event("Dave's Standard University Day",davidLivingstone,"2021-02-06T09:00","Kingston",items);
+        return eventManager.getEvents().add(testEvent);
+    }
     
+    public static boolean testAddEventToEventManagerEventListNoItems() {
+        EventManager eventManager = EventManager.getInstance();
+        Organiser jamesDenholmPrice = new Organiser("James","Denholm-Price");
+        Event testEvent = new Event("James' Vaccination Booster",jamesDenholmPrice,"2020-05-12T15:00","Lewisham");
+        return eventManager.getEvents().add(testEvent);
+    }
+    
+    public static boolean testAddEventToEventManagerEventListNoItemsAndOrganiser() {
+        EventManager eventManager = EventManager.getInstance();
+        Event testEvent = new Event("Ahmed's Algorithm Workshop","2022-01-10T11:00","Manchester");
+        return eventManager.getEvents().add(testEvent);
+    }
+    
+    public static boolean testAddEventToEventManagerEventListNotEmptyAllAttributes() {
+        EventManager eventManager = EventManager.getInstance();
+        EventManagerTest.testAddEventToEventManagerEventListAllAttributes();
+        return !eventManager.getEvents().isEmpty();
+    }
+    
+    public static boolean testAddEventToEventManagerEventListNotEmptyNoItems() {
+        EventManager eventManager = EventManager.getInstance();
+        EventManagerTest.testAddEventToEventManagerEventListNoItems();
+        return !eventManager.getEvents().isEmpty();
+    }
+    
+    public static boolean testAddEventToEventManagerEventListNotEmptyNoItemsAndOrganiser() {
+        EventManager eventManager = EventManager.getInstance();
+        EventManagerTest.testAddEventToEventManagerEventListNoItemsAndOrganiser();
+        return !eventManager.getEvents().isEmpty();
+    }
+    
+    public static boolean testAddEventToEventManagerEventListContainsAllAttributes() {
+        EventManager eventManager = EventManager.getInstance();
+        Organiser davidLivingstone = new Organiser("David","Livingstone");
+        List<Item> items = new ArrayList();
+        items.add(new Item("09:00","Wake up"));
+        items.add(new Item("10:00","Catch the bus"));
+        items.add(new Item("11:00","Arrive at Kingston University"));
+        items.add(new Item("12:00","Teach Programming"));
+        items.add(new Item("17:00","Go home"));
+        Event testEvent = new Event("Dave's Standard University Day",davidLivingstone,"2021-02-06T09:00","Kingston",items);
+        eventManager.getEvents().add(testEvent);
+        return eventManager.getEvents().contains(testEvent);
+    }
+    
+    public static boolean testAddEventToEventManagerEventListContainsNoItems() {
+        EventManager eventManager = EventManager.getInstance();
+        Organiser jamesDenholmPrice = new Organiser("James","Denholm-Price");
+        Event testEvent = new Event("James' Vaccination Booster",jamesDenholmPrice,"2020-05-12T15:00","Lewisham");
+        eventManager.getEvents().add(testEvent);
+        return eventManager.getEvents().contains(testEvent);
+    }
+    
+    public static boolean testAddEventToEventManagerEventListContainsNoItemsAndOrganiser() {
+        EventManager eventManager = EventManager.getInstance();
+        Event testEvent = new Event("Ahmed's Algorithm Workshop","2022-01-10T11:00","Manchester");
+        eventManager.getEvents().add(testEvent);
+        return eventManager.getEvents().contains(testEvent);
+    }
+    
+    public static boolean testAddEventToEventManagerEventListSize() {
+        EventManager eventManager = EventManager.getInstance();
+        int currentEventListSize = eventManager.getEvents().size();
+        EventManagerTest.testAddEventToEventManagerEventListAllAttributes();
+        EventManagerTest.testAddEventToEventManagerEventListNoItems();
+        EventManagerTest.testAddEventToEventManagerEventListNoItemsAndOrganiser();
+        if (eventManager.getEvents().size() == currentEventListSize + 3) {
+            return true;
+        }
+        return false;
+    }
 }

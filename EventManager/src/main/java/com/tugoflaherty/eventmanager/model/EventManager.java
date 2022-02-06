@@ -88,6 +88,32 @@ public class EventManager implements Serializable {
         return INSTANCE;
     }
     
+    public boolean addEvent(String title, Organiser organiser, String dateTime, String location, List<Item> items) {
+        Event newEvent = new Event(title, organiser, dateTime, location, items);
+        if (this.getEvents().contains(newEvent)) {
+            return false;
+        }
+        return this.getEvents().add(newEvent);
+    }
+    
+    public boolean addEvent(String title, Organiser organiser, String dateTime, String location) {
+        Event newEvent = new Event(title, organiser, dateTime, location);
+        if (this.getEvents().contains(newEvent)) {
+            return false;
+        }
+        return this.getEvents().add(newEvent);
+    }
+    
+    public boolean addEvent(String title, String dateTime, String location) {
+        Event newEvent = new Event(title, dateTime, location);
+        if (this.getEvents().contains(newEvent)) {
+            return false;
+        }
+        return this.getEvents().add(newEvent);
+    }
+    
+    
+    
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
         

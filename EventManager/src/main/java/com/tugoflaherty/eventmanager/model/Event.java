@@ -210,4 +210,18 @@ public class Event {
         return "Event{" + "title=" + this.getTitle() + this.getDateTime().toString() + this.getLocation() + "}";
     }
     
+    @Override	  		 	  	 	        	     	
+    public int hashCode() {	  		 	  	 	        	     	
+      int returnValue = 13;	  		 	  	 	        	     	
+      if (title != null) {	  		 	  	 	        	     	
+        returnValue = 19 * returnValue  + title.hashCode();	  		 	  	 	        	     	
+      }	  		 	  	 	        	     	
+      return returnValue;	  		 	  	 	        	     	
+    }	  		 	  	 	        	     	
+	  		 	  	 	        	     	
+    @Override	  		 	  	 	        	     	
+    public boolean equals(Object o) {	  		 	  	 	        	     	
+      return title.equals(((Event)o).getTitle());  		 	  	 	        	     	
+    }
+    
 }
