@@ -261,4 +261,26 @@ public class EventManagerTest {
         }
         return false;
     }
+    
+    public static boolean testEditEventDetailsAllFields() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Computing Systems Assessment","2022-05-02T17:00","New Malden");
+        eventManager.editEventDetails(0,"Programming Assignment","2022-05-02T18:00","Chessington");
+        Event editedEvent = eventManager.getEvents().get(0);
+        if (editedEvent.getTitle().equals("Programming Assignment") && editedEvent.getDateTime().toString().equals("2022-05-02T18:00") && editedEvent.getLocation().equals("Chessington")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testEditEventDetailsWithoutDate() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Computing Systems Assessment","2022-05-02T17:00","New Malden");
+        eventManager.editEventDetails(0,"Programming Assignment","","Chessington");
+        Event editedEvent = eventManager.getEvents().get(0);
+        if (editedEvent.getTitle().equals("Programming Assignment") && editedEvent.getDateTime().toString().equals("2022-05-02T17:00") && editedEvent.getLocation().equals("Chessington")) {
+            return true;
+        }
+        return false;
+    }
 }

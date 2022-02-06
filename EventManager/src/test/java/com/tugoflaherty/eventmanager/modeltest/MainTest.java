@@ -52,5 +52,7 @@ public class MainTest {
         //System.out.println(EventManagerTest.testAssociateOrganiserToEventContains());
         //System.out.println(EventManagerTest.testAddItemsToEventNull());
         //System.out.println(EventManagerTest.testAddItemsToEventContains());
+        //System.out.println(EventManagerTest.testEditEventDetailsAllFields());
+        //System.out.println(EventManagerTest.testEditEventDetailsWithoutDate());
     }
 }

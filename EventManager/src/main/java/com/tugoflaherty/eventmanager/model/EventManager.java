@@ -168,6 +168,28 @@ public class EventManager implements Serializable {
         return false;
     }
     
+    public boolean editEventDetails(int eventIndex, String title, String dateTime, String location) {
+        if (this.getEvents().size() > 0 && this.getEvents().size() >= eventIndex) {
+            Event selectedEvent = this.getEvents().get(eventIndex);
+            if (title.equals("") && dateTime.equals("") && location.equals("")) {
+                return false;
+            }
+            else {
+                if (!title.equals("")) {
+                    selectedEvent.setTitle(title);
+                }
+                if (!dateTime.equals("")) {
+                    selectedEvent.setDateTime(dateTime);
+                }
+                if (!location.equals("")) {
+                    selectedEvent.setLocation(location);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
         
