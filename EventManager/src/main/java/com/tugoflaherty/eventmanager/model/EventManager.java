@@ -159,6 +159,15 @@ public class EventManager implements Serializable {
         return false;
     }
     
+    public boolean addItemsToEvent(int eventIndex) {
+        if (this.getEvents().size() > 0 && this.getEvents().size() >= eventIndex) {
+            this.getEvents().get(eventIndex).setItems(new ArrayList<Item>(this.getItems()));
+            this.getItems().clear();
+            return true;
+        }
+        return false;
+    }
+    
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
         

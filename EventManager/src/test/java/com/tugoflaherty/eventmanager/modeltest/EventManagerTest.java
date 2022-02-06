@@ -206,13 +206,57 @@ public class EventManagerTest {
         return false;
     }
     
-    public static boolean testAssociateOrganiserToEvent() {
+    public static boolean testAssociateOrganiserToEventNull() {
         EventManager eventManager = EventManager.getInstance();
         eventManager.addEvent("Kingston University Open Day","2022-02-06T09:00","Kingston");
         Organiser previousOrganiser = eventManager.getEvents().get(0).getOrganiser();
         eventManager.addOrganiser("David","Livingstone");
         eventManager.associateOrganiserToEvent(0,0);
         if (previousOrganiser == null && eventManager.getEvents().get(0).getOrganiser() != null) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testAssociateOrganiserToEventContains() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Kingston University Open Day","2022-02-06T09:00","Kingston");
+        eventManager.addOrganiser("David","Livingstone");
+        eventManager.associateOrganiserToEvent(0,0);
+        if (eventManager.getEvents().get(0).getOrganiser().getFirstName().equals("David")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testAddItemsToEventNull() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Database-Driven Application Development Assessment","2022-02-17T09:00","Worcester Park");
+        List<Item> currentItems = eventManager.getEvents().get(0).getItems();
+        eventManager.addItem("09:00","Exam Briefing");
+        eventManager.addItem("10:00","Students Enter Exam Hall");
+        eventManager.addItem("11:00","Exam Starts");
+        eventManager.addItem("15:00","Exam Ends");
+        eventManager.addItemsToEvent(0);
+        //System.out.println("Current Items:" + currentItems.size() + currentItems.toString());
+        //System.out.println("EventManager Items:" + eventManager.getItems().size() + eventManager.getItems().toString());
+        //System.out.println("Event(0) Items:" + eventManager.getEvents().get(0).getItems().size() + eventManager.getEvents().get(0).getItems().toString());
+        if (currentItems.isEmpty() && eventManager.getEvents().get(0).getItems().size() == 4) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testAddItemsToEventContains() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Database-Driven Application Development Assessment","2022-02-17T09:00","Worcester Park");
+        List<Item> currentItems = eventManager.getEvents().get(0).getItems();
+        eventManager.addItem("09:00","Exam Briefing");
+        eventManager.addItem("10:00","Students Enter Exam Hall");
+        eventManager.addItem("11:00","Exam Starts");
+        eventManager.addItem("15:00","Exam Ends");
+        eventManager.addItemsToEvent(0);
+        if (currentItems.isEmpty() && eventManager.getEvents().get(0).getItems().get(0).getItemTitle().equals("Exam Briefing")) {
             return true;
         }
         return false;
