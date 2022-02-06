@@ -48,5 +48,6 @@ public class MainTest {
         //System.out.println(EventManagerTest.testAddItemToEventManagerItemListSize());
         //System.out.println(EventManagerTest.testDeleteItemFromEventManagerItemListDoesNotContain());
         //System.out.println(EventManagerTest.testDeleteEventToEventManagerItemListSize());
+        //System.out.println(EventManagerTest.testAssociateOrganiserToEvent());
     }
 }

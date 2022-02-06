@@ -126,9 +126,34 @@ public class EventManager implements Serializable {
     }
     
     public boolean deleteItem(int itemIndex) {
-        
         if (this.getItems().size() > 0 && this.getItems().size() >= itemIndex) {
             this.getItems().remove(itemIndex);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean addOrganiser(String firstName, String lastName) {
+        Organiser newOrganiser = new Organiser(firstName, lastName);
+        if (this.getOrganisers().contains(newOrganiser)) {
+            return false;
+        }
+        return this.getOrganisers().add(newOrganiser);
+    }
+    
+    public boolean deleteOrganiser(int organiserIndex) {
+        if (this.getOrganisers().size() > 0 && this.getOrganisers().size() >= organiserIndex) {
+            this.getOrganisers().remove(organiserIndex);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean associateOrganiserToEvent(int eventIndex, int organiserIndex) {
+        if (this.getEvents().size() > 0 && this.getEvents().size() >= eventIndex && this.getOrganisers().size() > 0 && this.getOrganisers().size() >= organiserIndex) {
+            Event selectedEvent = this.getEvents().get(eventIndex);
+            Organiser selectedOrganiser = this.getOrganisers().get(organiserIndex);
+            selectedEvent.setOrganiser(selectedOrganiser);
             return true;
         }
         return false;

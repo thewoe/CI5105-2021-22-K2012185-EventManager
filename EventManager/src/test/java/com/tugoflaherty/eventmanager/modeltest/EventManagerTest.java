@@ -205,4 +205,16 @@ public class EventManagerTest {
         }
         return false;
     }
+    
+    public static boolean testAssociateOrganiserToEvent() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Kingston University Open Day","2022-02-06T09:00","Kingston");
+        Organiser previousOrganiser = eventManager.getEvents().get(0).getOrganiser();
+        eventManager.addOrganiser("David","Livingstone");
+        eventManager.associateOrganiserToEvent(0,0);
+        if (previousOrganiser == null && eventManager.getEvents().get(0).getOrganiser() != null) {
+            return true;
+        }
+        return false;
+    }
 }
