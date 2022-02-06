@@ -19,15 +19,18 @@ public class MainTest {
         
         //instantiation of all test classes
         
-        EventManagerTest eventManagerTest = new EventManagerTest();
-        EventTest eventTest = new EventTest();
-        ItemTest itemTest = new ItemTest();
-        OrganiserTest organiserTest = new OrganiserTest();
+        //EventManagerTest eventManagerTest = new EventManagerTest();
+        //EventTest eventTest = new EventTest();
+        //ItemTest itemTest = new ItemTest();
+        //OrganiserTest organiserTest = new OrganiserTest();
         
-        itemTest.testItemCreation();
-        organiserTest.testOrganiserCreation();
-        eventTest.testEventCreation();
-        eventManagerTest.testEventManagerCreation();
+        //itemTest.testItemCreation();
+        //organiserTest.testOrganiserCreation();
+        //eventTest.testEventCreation();
+        System.out.println(EventManagerTest.testSingletonEventManagerCreation());
+        System.out.println(EventManagerTest.testEmptyEventManagerEventList());
+        System.out.println(EventManagerTest.testEmptyEventManagerItemList());
+        System.out.println(EventManagerTest.testEmptyEventManagerOrganiserList());
         
     }
 }

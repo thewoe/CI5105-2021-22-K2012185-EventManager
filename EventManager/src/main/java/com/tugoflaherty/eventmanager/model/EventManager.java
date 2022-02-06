@@ -5,6 +5,7 @@
  */
 package com.tugoflaherty.eventmanager.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,8 +13,9 @@ import java.util.ArrayList;
  *
  * @author tugoflaherty
  */
-public class EventManager {
+public class EventManager implements Serializable {
 
+    private static EventManager INSTANCE = new EventManager();
     private List<Event> events = new ArrayList();
     private List<Item> items = new ArrayList();
     private List<Organiser> organisers = new ArrayList();
@@ -72,6 +74,22 @@ public class EventManager {
         this.organisers = organisers;
     }
     
+    private EventManager() {
+        //insert observer thingy
+        //inset initialisation for events, organisers, and put in relevant arraylist
+    }
     
+    public static EventManager getInstance() {
+        if (INSTANCE==null) {
+            INSTANCE = new EventManager();
+            //System.out.println("New EventManager instance created");
+        }
+        //System.out.println("Using the first EventManager instance created");
+        return INSTANCE;
+    }
     
+    public static void main(String[] args) {
+        EventManager eventManager = EventManager.getInstance();
+        
+    }
 }

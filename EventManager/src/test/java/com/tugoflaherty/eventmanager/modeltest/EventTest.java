@@ -63,7 +63,7 @@ public class EventTest {
         System.out.println("Event: " + assessmentCentre.getTitle() + " " + assessmentCentre.getOrganiser().toString() + "" + assessmentCentre.getDateTime().toString() + " " + assessmentCentre.getLocation() + " " + assessmentCentre.getItems().toString());
         System.out.println("Event: " + scotlandHoliday.getTitle() + " " + scotlandHoliday.getOrganiser().toString() + "" + scotlandHoliday.getDateTime().toString() + " " + scotlandHoliday.getLocation() + " " + scotlandHoliday.getItems().toString());
         System.out.println("Event: " + websiteDevelopment.getTitle() + " " + websiteDevelopment.getOrganiser().toString() + "" + websiteDevelopment.getDateTime().toString() + " " + websiteDevelopment.getLocation() + " " + websiteDevelopment.getItems().toString());
-        System.out.println("Event: " + vaccinationBooster.getTitle() + " " + vaccinationBooster.getOrganiser().toString() + "" + vaccinationBooster.getDateTime().toString() + " " + vaccinationBooster.getLocation() + " " + vaccinationBooster.getItems().toString());
-        System.out.println("Event: " + movieFilming.getTitle() + " " + movieFilming.getOrganiser().toString() + "" + movieFilming.getDateTime().toString() + " " + movieFilming.getLocation() + " " + movieFilming.getItems().toString());
+        //System.out.println("Event: " + vaccinationBooster.getTitle() + " " + vaccinationBooster.getOrganiser().toString() + "" + vaccinationBooster.getDateTime().toString() + " " + vaccinationBooster.getLocation() + " " + vaccinationBooster.getItems().toString());
+        //System.out.println("Event: " + movieFilming.getTitle() + " " + movieFilming.getOrganiser().toString() + "" + movieFilming.getDateTime().toString() + " " + movieFilming.getLocation() + " " + movieFilming.getItems().toString());
     }
 }

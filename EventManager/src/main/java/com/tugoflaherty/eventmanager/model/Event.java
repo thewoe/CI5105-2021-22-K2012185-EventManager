@@ -206,4 +206,8 @@ public class Event {
         this.setLocation(location);
     }
     
+    public String eventToString() {
+        return "Event{" + "title=" + this.getTitle() + this.getDateTime().toString() + this.getLocation() + "}";
+    }
+    
 }
