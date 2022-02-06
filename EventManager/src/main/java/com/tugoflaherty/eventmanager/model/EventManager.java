@@ -5,6 +5,8 @@
  */
 package com.tugoflaherty.eventmanager.model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
@@ -168,6 +170,14 @@ public class EventManager implements Serializable {
         return false;
     }
     
+    public boolean addItemsToEvent(int eventIndex, String startTime, String itemTitle) {
+        if (this.getEvents().size() > 0 && this.getEvents().size() >= eventIndex) {
+            this.getEvents().get(eventIndex).addItem(new Item(startTime,itemTitle));
+            return true;
+        }
+        return false;
+    }
+    
     public boolean editEventDetails(int eventIndex, String title, String dateTime, String location) {
         if (this.getEvents().size() > 0 && this.getEvents().size() >= eventIndex) {
             Event selectedEvent = this.getEvents().get(eventIndex);
@@ -190,8 +200,66 @@ public class EventManager implements Serializable {
         return false;
     }
     
+    public void readConfigFile(String fileInput) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+            while (bReader.ready()) {
+                String line = bReader.readLine();
+                String fileList[] = line.trim().split(",");
+                this.readOrganisersFile(fileList[0]);
+                this.readEventsFile(fileList[1]);
+                this.readItemsFile(fileList[2]);
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error reading Config file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
+    public void readOrganisersFile(String fileInput) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+            while (bReader.ready()) {
+                String line = bReader.readLine();
+                String organiserList[] = line.trim().split(",");
+                this.addOrganiser(organiserList[0],organiserList[1]);
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error reading Organisers file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
+    public void readEventsFile(String fileInput) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+            while (bReader.ready()) {
+                String line = bReader.readLine();
+                String eventList[] = line.trim().split(",");
+                if (eventList[1].equals("null") ) {
+                    this.addEvent(eventList[0],eventList[2],eventList[3]);
+                }
+                else {
+                    this.addEvent(eventList[0],this.getOrganisers().get(Integer.parseInt(eventList[1])),eventList[2],eventList[3]);
+                }
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error reading Events file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
+    public void readItemsFile(String fileInput) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+            while (bReader.ready()) {
+                String line = bReader.readLine();
+                String itemList[] = line.trim().split(",");
+                this.addItemsToEvent(Integer.parseInt(itemList[0]),itemList[1],itemList[2]);
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error reading Items file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
-        
     }
 }

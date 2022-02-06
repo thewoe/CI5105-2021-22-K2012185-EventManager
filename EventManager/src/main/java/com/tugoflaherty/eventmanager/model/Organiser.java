@@ -60,4 +60,8 @@ public class Organiser {
         this.setLastName(lastName);
     }
     
+    @Override
+    public String toString() {
+        return "Organiser{" + "firstName=" + this.getFirstName() + "lastName" + this.getLastName() + "}";
+    }
 }

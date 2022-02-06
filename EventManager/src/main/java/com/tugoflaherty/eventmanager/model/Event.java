@@ -206,8 +206,17 @@ public class Event {
         this.setLocation(location);
     }
     
-    public String eventToString() {
-        return "Event{" + "title=" + this.getTitle() + this.getDateTime().toString() + this.getLocation() + "}";
+    public void addItem(Item item) {
+        this.getItems().add(item);
+    }
+    
+    @Override
+    public String toString() {
+        if (this.getOrganiser() != null) {
+            return "Event{" + "title=" + this.getTitle() + "organiser=" + this.getOrganiser().toString() + "time=" + this.getDateTime().toString() + "location=" + this.getLocation() + "}";
+        }
+        return "Event{" + "title=" + this.getTitle() + "organiser=null" + "time=" + this.getDateTime().toString() + "location=" + this.getLocation() + "}";
+
     }
     
     @Override	  		 	  	 	        	     	

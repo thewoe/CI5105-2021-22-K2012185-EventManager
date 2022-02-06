@@ -83,4 +83,9 @@ public class Item {
         this.setItemTitle(itemTitle);
     }
     
+    @Override
+    public String toString() {
+        return "Item{" + "title=" + this.getItemTitle() + "time=" + this.getStartTime().toString() + "}";
+    }
+    
 }

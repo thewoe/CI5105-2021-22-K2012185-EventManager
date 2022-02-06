@@ -283,4 +283,65 @@ public class EventManagerTest {
         }
         return false;
     }
+    
+    public static boolean testReadOrganisersFile() {
+        EventManager eventManager = EventManager.getInstance();
+        int currentOrganiserNumber = eventManager.getOrganisers().size();
+        //System.out.println(eventManager.getOrganisers().toString());
+        eventManager.readOrganisersFile("Organisers.csv");
+        //System.out.println(eventManager.getOrganisers().toString());
+        if (eventManager.getOrganisers().size() > currentOrganiserNumber) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testReadEventsFile() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.readOrganisersFile("Organisers.csv");
+        int currentEventNumber = eventManager.getEvents().size();
+        //System.out.println(eventManager.getEvents().toString());
+        eventManager.readEventsFile("Events.csv");
+        //System.out.println(eventManager.getEvents().toString());
+        if (eventManager.getEvents().size() > currentEventNumber) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testReadItemsFile() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.readOrganisersFile("Organisers.csv");
+        eventManager.readEventsFile("Events.csv");
+        int eventZeroCurrentItemNumber = eventManager.getEvents().get(0).getItems().size();
+        /*for (Event e : eventManager.getEvents()) {
+            System.out.println(e.getItems().toString());
+        }*/
+        eventManager.readItemsFile("Items.csv");
+        /*for (Event e : eventManager.getEvents()) {
+            System.out.println(e.getItems().toString());
+        }*/
+        if (eventManager.getEvents().get(0).getItems().size() > eventZeroCurrentItemNumber) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testReadConfigFile() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.readConfigFile("Config.csv");
+        /*for (Organiser o : eventManager.getOrganisers()) {
+            System.out.println(o.toString());
+        }
+        for (Event e : eventManager.getEvents()) {
+            System.out.println(e.toString());
+        }
+        for (Event e : eventManager.getEvents()) {
+            System.out.println(e.getItems().toString());
+        }*/
+        if (eventManager.getOrganisers().size() > 0 && eventManager.getEvents().size() > 0 && eventManager.getEvents().get(0).getItems().size() > 0) {
+            return true;
+        }
+        return false;
+    }
 }
