@@ -127,7 +127,7 @@ public class EventManagerTest {
         return false;
     }
     
-    public static boolean testDeleteEventToEventManagerEventListDoesNotContain() {
+    public static boolean testDeleteEventFromEventManagerEventListDoesNotContain() {
         EventManager eventManager = EventManager.getInstance();
         Organiser davidLivingstone = new Organiser("David","Livingstone");
         List<Item> items = new ArrayList();
@@ -147,7 +147,7 @@ public class EventManagerTest {
         return !eventManager.getEvents().contains(testEvent1);
     }
     
-    public static boolean testDeleteEventToEventManagerEventListSize() {
+    public static boolean testDeleteEventFromEventManagerEventListSize() {
         EventManager eventManager = EventManager.getInstance();
         EventManagerTest.testAddEventToEventManagerEventListAllAttributes();
         EventManagerTest.testAddEventToEventManagerEventListNoItems();
@@ -179,6 +179,28 @@ public class EventManagerTest {
         int currentItemListSize = eventManager.getItems().size();
         EventManagerTest.testAddItemToEventManagerItemList();
         if (eventManager.getItems().size() == currentItemListSize + 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testDeleteItemFromEventManagerItemListDoesNotContain() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addItem("09:00","Wake up");
+        eventManager.addItem("10:00","Catch the bus");
+        eventManager.addItem("11:00","Arrive at Kingston University");
+        eventManager.deleteItem(1);
+        return !eventManager.getItems().get(1).getItemTitle().equals("Catch the bus");
+    }
+    
+    public static boolean testDeleteEventToEventManagerItemListSize() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addItem("09:00","Wake up");
+        eventManager.addItem("10:00","Catch the bus");
+        eventManager.addItem("11:00","Arrive at Kingston University");
+        int currentItemListSize = eventManager.getItems().size();
+        eventManager.deleteItem(1);
+        if (eventManager.getItems().size() == currentItemListSize -1) {
             return true;
         }
         return false;
