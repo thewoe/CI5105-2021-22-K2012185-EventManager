@@ -37,9 +37,11 @@ public class MainTest {
         //System.out.println(EventManagerTest.testAddEventToEventManagerEventListNotEmptyAllAttributes());
         //System.out.println(EventManagerTest.testAddEventToEventManagerEventListNotEmptyNoItems());
         //System.out.println(EventManagerTest.testAddEventToEventManagerEventListNotEmptyNoItemsAndOrganiser());
-        System.out.println(EventManagerTest.testAddEventToEventManagerEventListContainsAllAttributes());
-        System.out.println(EventManagerTest.testAddEventToEventManagerEventListContainsNoItems());
-        System.out.println(EventManagerTest.testAddEventToEventManagerEventListContainsNoItemsAndOrganiser());
-        System.out.println(EventManagerTest.testAddEventToEventManagerEventListSize());
+        //System.out.println(EventManagerTest.testAddEventToEventManagerEventListContainsAllAttributes());
+        //System.out.println(EventManagerTest.testAddEventToEventManagerEventListContainsNoItems());
+        //System.out.println(EventManagerTest.testAddEventToEventManagerEventListContainsNoItemsAndOrganiser());
+        //System.out.println(EventManagerTest.testAddEventToEventManagerEventListSize());
+        //System.out.println(EventManagerTest.testDeleteEventToEventManagerEventListDoesNotContain());
+        //System.out.println(EventManagerTest.testDeleteEventToEventManagerEventListSize());
     }
 }

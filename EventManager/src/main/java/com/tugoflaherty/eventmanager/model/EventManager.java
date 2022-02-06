@@ -112,7 +112,13 @@ public class EventManager implements Serializable {
         return this.getEvents().add(newEvent);
     }
     
-    
+    public boolean deleteEvent(int eventIndex) {
+        if (this.getEvents().size() > 0 && this.getEvents().size() >= eventIndex) {
+            this.getEvents().remove(eventIndex);
+            return true;
+        }
+        return false;
+    }
     
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();

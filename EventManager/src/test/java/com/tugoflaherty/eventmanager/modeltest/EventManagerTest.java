@@ -126,4 +126,37 @@ public class EventManagerTest {
         }
         return false;
     }
+    
+    public static boolean testDeleteEventToEventManagerEventListDoesNotContain() {
+        EventManager eventManager = EventManager.getInstance();
+        Organiser davidLivingstone = new Organiser("David","Livingstone");
+        List<Item> items = new ArrayList();
+        items.add(new Item("09:00","Wake up"));
+        items.add(new Item("10:00","Catch the bus"));
+        items.add(new Item("11:00","Arrive at Kingston University"));
+        items.add(new Item("12:00","Teach Programming"));
+        items.add(new Item("17:00","Go home"));
+        Event testEvent0 = new Event("Dave's Standard University Day",davidLivingstone,"2021-02-06T09:00","Kingston",items);
+        eventManager.getEvents().add(testEvent0);
+        Organiser jamesDenholmPrice = new Organiser("James","Denholm-Price");
+        Event testEvent1 = new Event("James' Vaccination Booster",jamesDenholmPrice,"2020-05-12T15:00","Lewisham");
+        eventManager.getEvents().add(testEvent1);
+        Event testEvent2 = new Event("Ahmed's Algorithm Workshop","2022-01-10T11:00","Manchester");
+        eventManager.getEvents().add(testEvent2);
+        eventManager.deleteEvent(1);
+        return !eventManager.getEvents().contains(testEvent1);
+    }
+    
+    public static boolean testDeleteEventToEventManagerEventListSize() {
+        EventManager eventManager = EventManager.getInstance();
+        EventManagerTest.testAddEventToEventManagerEventListAllAttributes();
+        EventManagerTest.testAddEventToEventManagerEventListNoItems();
+        EventManagerTest.testAddEventToEventManagerEventListNoItemsAndOrganiser();
+        int currentEventListSize = eventManager.getEvents().size();
+        eventManager.deleteEvent(2);
+        if (eventManager.getEvents().size() == currentEventListSize -1) {
+            return true;
+        }
+        return false;
+    }
 }
