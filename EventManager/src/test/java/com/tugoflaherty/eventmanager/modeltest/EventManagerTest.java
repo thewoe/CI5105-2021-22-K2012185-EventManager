@@ -159,4 +159,28 @@ public class EventManagerTest {
         }
         return false;
     }
+    
+    public static boolean testAddItemToEventManagerItemList() {
+        EventManager eventManager = EventManager.getInstance();
+        return eventManager.addItem("15:00","Presentation by guest Professor Graeme Jones");
+    }
+    
+    public static boolean testAddItemToEventManagerItemListContains() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addItem("09:00","Welcome audience to conference");
+        if (eventManager.getItems().get(eventManager.getItems().size()-1).getItemTitle().equals("Welcome audience to conference")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testAddItemToEventManagerItemListSize() {
+        EventManager eventManager = EventManager.getInstance();
+        int currentItemListSize = eventManager.getItems().size();
+        EventManagerTest.testAddItemToEventManagerItemList();
+        if (eventManager.getItems().size() == currentItemListSize + 1) {
+            return true;
+        }
+        return false;
+    }
 }

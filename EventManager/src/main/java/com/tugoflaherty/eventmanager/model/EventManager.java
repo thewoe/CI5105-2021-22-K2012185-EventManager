@@ -120,6 +120,11 @@ public class EventManager implements Serializable {
         return false;
     }
     
+    public boolean addItem(String startTime, String itemTitle) {
+        Item newItem = new Item(startTime, itemTitle);
+        return this.getItems().add(newItem);
+    }
+    
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
         
