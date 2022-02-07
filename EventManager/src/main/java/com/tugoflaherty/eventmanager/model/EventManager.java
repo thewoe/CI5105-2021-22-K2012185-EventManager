@@ -202,8 +202,8 @@ public class EventManager implements Serializable {
         return false;
     }
     
-    public void readConfigFile(String fileInput) {	  		 	  	 	        	     	
-        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+    public void readConfigFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(filePath))) {
             while (bReader.ready()) {
                 String line = bReader.readLine();
                 String fileList[] = line.trim().split(",");
@@ -217,8 +217,8 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void readOrganisersFile(String fileInput) {	  		 	  	 	        	     	
-        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+    public void readOrganisersFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(filePath))) {
             while (bReader.ready()) {
                 String line = bReader.readLine();
                 String organiserList[] = line.trim().split(",");
@@ -230,8 +230,8 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void readEventsFile(String fileInput) {	  		 	  	 	        	     	
-        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+    public void readEventsFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(filePath))) {
             while (bReader.ready()) {
                 String line = bReader.readLine();
                 String eventList[] = line.trim().split(",");
@@ -248,8 +248,8 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void readItemsFile(String fileInput) {	  		 	  	 	        	     	
-        try(BufferedReader bReader = new BufferedReader(new FileReader(fileInput))) {
+    public void readItemsFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedReader bReader = new BufferedReader(new FileReader(filePath))) {
             while (bReader.ready()) {
                 String line = bReader.readLine();
                 String itemList[] = line.trim().split(",");
@@ -263,9 +263,9 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void writeConfigFile(String fileOutput) {	  		 	  	 	        	     	
-        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
-            String line = "Organisers.csv,Events.csv,Items.csv";
+    public void writeConfigFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(filePath+".csv"))) {
+            String line = filePath+"Organisers.csv,"+filePath+"Events.csv,"+filePath+"Items.csv";
             bWriter.write(line);
         }	  		 	  	 	        	     	
         catch (Exception o) {
@@ -273,8 +273,8 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void writeOrganisersFile(String fileOutput) {	  		 	  	 	        	     	
-        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
+    public void writeOrganisersFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(filePath+"Organisers.csv"))) {
             for (int i=0; i<this.getOrganisers().size(); i++) {
                 String line = this.getOrganisers().get(i).getFirstName() + "," + this.getOrganisers().get(i).getLastName();
                 bWriter.write(line);
@@ -288,8 +288,8 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void writeEventsFile(String fileOutput) {	  		 	  	 	        	     	
-        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
+    public void writeEventsFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(filePath+"Events.csv"))) {
             for (int i=0; i<this.getEvents().size(); i++) {
                 if (this.getEvents().get(i).getOrganiser() != null) {
                     String line = this.getEvents().get(i).getTitle() + "," + this.getOrganisers().indexOf(this.getEvents().get(i).getOrganiser()) + "," + this.getEvents().get(i).getDateTime().toString() + "," + this.getEvents().get(i).getLocation();
@@ -309,8 +309,8 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void writeItemsFile(String fileOutput) {	  		 	  	 	        	     	
-        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
+    public void writeItemsFile(String filePath) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(filePath+"Items.csv"))) {
             for (int i=0; i<this.getEvents().size(); i++) {
                 for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
                     if (!this.getEvents().get(i).getItems().isEmpty()) {
@@ -326,5 +326,11 @@ public class EventManager implements Serializable {
         catch (Exception o) {
             System.out.println("Error writing Items file");	 	  	 	        	     	
         }	  		 	  	 	        	     		  
+    }
+    
+    public void initialiseManager() {
+        this.getOrganisers().clear();
+        this.getEvents().clear();
+        this.getItems().clear();
     }
 }
