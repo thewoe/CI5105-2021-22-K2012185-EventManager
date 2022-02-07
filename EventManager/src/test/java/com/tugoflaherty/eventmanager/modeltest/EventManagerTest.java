@@ -344,4 +344,56 @@ public class EventManagerTest {
         }
         return false;
     }
+    
+    public static boolean testWriteConfigFile() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.writeConfigFile("ConfigTest.csv");
+        eventManager.readConfigFile("ConfigTest.csv");
+        if (eventManager.getOrganisers().size() > 0 && eventManager.getEvents().size() > 0 && eventManager.getEvents().get(0).getItems().size() > 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testWriteOrganisersFile() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.readOrganisersFile("Organisers.csv");
+        eventManager.writeOrganisersFile("OrganisersTest.csv");
+        int previousOrganiserCount = eventManager.getOrganisers().size();
+        eventManager.readOrganisersFile("OrganisersTest.csv");
+        if (eventManager.getOrganisers().size() == previousOrganiserCount*2) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testWriteEventsFile() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.readOrganisersFile("Organisers.csv");
+        eventManager.readEventsFile("Events.csv");
+        eventManager.writeEventsFile("EventsTest.csv");
+        int previousEventCount = eventManager.getEvents().size();
+        eventManager.readEventsFile("EventsTest.csv");
+        if (eventManager.getEvents().size() == previousEventCount) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testWriteItemsFile() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.readOrganisersFile("Organisers.csv");
+        eventManager.readEventsFile("Events.csv");
+        eventManager.readItemsFile("Items.csv");
+        eventManager.writeItemsFile("ItemsTest.csv");
+        int eventZeroCount = eventManager.getEvents().get(0).getItems().size();
+        eventManager.readItemsFile("ItemsTest.csv");
+        for (int i=0; i<eventManager.getEvents().size(); i++) {
+            System.out.println(eventManager.getEvents().get(i).getItems().toString());
+        }
+        if (eventManager.getEvents().get(0).getItems().size() == eventZeroCount*2) {
+            return true;
+        }
+        return false;
+    }
 }

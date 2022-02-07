@@ -6,7 +6,9 @@
 package com.tugoflaherty.eventmanager.model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
@@ -251,11 +253,78 @@ public class EventManager implements Serializable {
             while (bReader.ready()) {
                 String line = bReader.readLine();
                 String itemList[] = line.trim().split(",");
-                this.addItemsToEvent(Integer.parseInt(itemList[0]),itemList[1],itemList[2]);
+                if (itemList.length !=0 && !itemList[0].equals("")) {
+                    this.addItemsToEvent(Integer.parseInt(itemList[0]),itemList[1],itemList[2]);
+                }
             }
         }	  		 	  	 	        	     	
         catch (Exception o) {
             System.out.println("Error reading Items file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
+    public void writeConfigFile(String fileOutput) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
+            String line = "Organisers.csv,Events.csv,Items.csv";
+            bWriter.write(line);
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error writing Config file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
+    public void writeOrganisersFile(String fileOutput) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
+            for (int i=0; i<this.getOrganisers().size(); i++) {
+                String line = this.getOrganisers().get(i).getFirstName() + "," + this.getOrganisers().get(i).getLastName();
+                bWriter.write(line);
+                if (i != this.getOrganisers().size() - 1) {
+                    bWriter.newLine();
+                }
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error writing Organisers file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
+    public void writeEventsFile(String fileOutput) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
+            for (int i=0; i<this.getEvents().size(); i++) {
+                if (this.getEvents().get(i).getOrganiser() != null) {
+                    String line = this.getEvents().get(i).getTitle() + "," + this.getOrganisers().indexOf(this.getEvents().get(i).getOrganiser()) + "," + this.getEvents().get(i).getDateTime().toString() + "," + this.getEvents().get(i).getLocation();
+                    bWriter.write(line);
+                }
+                else {
+                    String line = this.getEvents().get(i).getTitle() + "," + "null" + "," + this.getEvents().get(i).getDateTime().toString() + "," + this.getEvents().get(i).getLocation();
+                    bWriter.write(line);
+                }
+                if (i != this.getEvents().size() - 1) {
+                    bWriter.newLine();
+                }
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error writing Events file");	 	  	 	        	     	
+        }	  		 	  	 	        	     		  
+    }
+    
+    public void writeItemsFile(String fileOutput) {	  		 	  	 	        	     	
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter(fileOutput))) {
+            for (int i=0; i<this.getEvents().size(); i++) {
+                for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
+                    if (!this.getEvents().get(i).getItems().isEmpty()) {
+                        String line = i + "," + this.getEvents().get(i).getItems().get(j).getStartTime().toString() + "," + this.getEvents().get(i).getItems().get(j).getItemTitle();
+                        bWriter.write(line);
+                    }
+                    //if ((!this.getEvents().get(i).getItems().isEmpty()) && (i != this.getEvents().size()-1) && (j != this.getEvents().get(this.getEvents().size()-1).getItems().size()-1)) {
+                        bWriter.newLine();
+                    //}
+                }
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error writing Items file");	 	  	 	        	     	
         }	  		 	  	 	        	     		  
     }
     

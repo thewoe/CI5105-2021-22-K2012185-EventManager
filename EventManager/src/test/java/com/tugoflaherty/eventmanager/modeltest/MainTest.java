@@ -58,5 +58,9 @@ public class MainTest {
         //System.out.println(EventManagerTest.testReadEventsFile());
         //System.out.println(EventManagerTest.testReadItemsFile());
         //System.out.println(EventManagerTest.testReadConfigFile());
+        //System.out.println(EventManagerTest.testWriteConfigFile());
+        //System.out.println(EventManagerTest.testWriteOrganisersFile());
+        //System.out.println(EventManagerTest.testWriteEventsFile());
+        //System.out.println(EventManagerTest.testWriteItemsFile());
     }
 }
