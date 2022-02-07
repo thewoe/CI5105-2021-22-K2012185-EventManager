@@ -12,10 +12,9 @@ import java.awt.event.ActionListener;
  *
  * @author tugso
  */
-public class MyHandler implements ActionListener {
-    //Class Methods
+public class ButtonPanelController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
-        //add in all the button clicky things here.
+        System.out.println(ae.getActionCommand()); //(un)comment for testing JButtons/JMenuItems
     }
 }

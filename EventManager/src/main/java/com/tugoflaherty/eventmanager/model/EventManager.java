@@ -327,8 +327,4 @@ public class EventManager implements Serializable {
             System.out.println("Error writing Items file");	 	  	 	        	     	
         }	  		 	  	 	        	     		  
     }
-    
-    public static void main(String[] args) {
-        EventManager eventManager = EventManager.getInstance();
-    }
 }

@@ -5,6 +5,7 @@
  */
 package com.tugoflaherty.eventmanager.view;
 
+import com.tugoflaherty.eventmanager.controller.ButtonPanelController;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -22,10 +23,17 @@ public class ButtonPanel extends JPanel {
     private JButton deleteEvent = new JButton("Delete Event");
     
     public ButtonPanel() {
+        ButtonPanelController eventHandler = new ButtonPanelController();
         this.setLayout(new FlowLayout());
         addEvent.setPreferredSize(new Dimension(150, 25));
         addItem.setPreferredSize(new Dimension(150, 25));
         deleteEvent.setPreferredSize(new Dimension(150, 25));
+        addEvent.setActionCommand("addEvent");
+        addEvent.addActionListener(eventHandler);
+        addItem.setActionCommand("addItem");
+        addItem.addActionListener(eventHandler);
+        deleteEvent.setActionCommand("deleteEvent");
+        deleteEvent.addActionListener(eventHandler);
         this.add(addEvent);
         this.add(addItem);
         this.add(deleteEvent);

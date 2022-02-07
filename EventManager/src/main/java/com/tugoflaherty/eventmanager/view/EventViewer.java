@@ -5,6 +5,7 @@
  */
 package com.tugoflaherty.eventmanager.view;
 
+import com.tugoflaherty.eventmanager.controller.EventViewerController;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -57,45 +58,88 @@ public class EventViewer extends JFrame {
     }
     
     private EventViewer() {
+        EventViewerController eventHandler = new EventViewerController();
         this.setTitle("Event Viewer");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(400,0,575,425);
-        this.setVisible(true);
         this.setLayout(new BorderLayout());
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         menuBar.add(viewMenu);
+        openFile.setActionCommand("openFile");
+        openFile.addActionListener(eventHandler);
         fileMenu.add(openFile);
+        saveFile.setActionCommand("saveFile");
+        saveFile.addActionListener(eventHandler);
         fileMenu.add(saveFile);
         fileMenu.addSeparator();
+        newEvent.setActionCommand("addEvent");
+        newEvent.addActionListener(eventHandler);
         fileMenu.add(newEvent);
+        newItem.setActionCommand("addItem");
+        newItem.addActionListener(eventHandler);
         fileMenu.add(newItem);
+        newOrganiser.setActionCommand("addOrganiser");
+        newOrganiser.addActionListener(eventHandler);
         fileMenu.add(newOrganiser);
         fileMenu.addSeparator();
+        quitApplication.setActionCommand("quitApplication");
+        quitApplication.addActionListener(eventHandler);
         fileMenu.add(quitApplication);
+        editEvent.setActionCommand("editEvent");
+        editEvent.addActionListener(eventHandler);
         editMenu.add(editEvent);
+        editItem.setActionCommand("editItem");
+        editItem.addActionListener(eventHandler);
         editMenu.add(editItem);
+        editOrganiser.setActionCommand("editOrganiser");
+        editOrganiser.addActionListener(eventHandler);
         editMenu.add(editOrganiser);
         editMenu.addSeparator();
+        associateEventOrganiser.setActionCommand("associateEventOrganiser");
+        associateEventOrganiser.addActionListener(eventHandler);
         editMenu.add(associateEventOrganiser);
+        addItemsToEvent.setActionCommand("addItemsToEvent");
+        addItemsToEvent.addActionListener(eventHandler);
         editMenu.add(addItemsToEvent);
         editMenu.addSeparator();
+        deleteEvent.setActionCommand("deleteEvent");
+        deleteEvent.addActionListener(eventHandler);
         editMenu.add(deleteEvent);
+        deleteItem.setActionCommand("deleteItem");
+        deleteItem.addActionListener(eventHandler);
         editMenu.add(deleteItem);
+        deleteOrganiser.setActionCommand("deleteOrganiser");
+        deleteOrganiser.addActionListener(eventHandler);
         editMenu.add(deleteOrganiser);
+        textView.setActionCommand("textView");
+        textView.addActionListener(eventHandler);
         viewMenu.add(textView);
-        viewMenu.add(tableView);
+        hierarchalView.setActionCommand("hierarchalView");
+        hierarchalView.addActionListener(eventHandler);
         viewMenu.add(hierarchalView);
+        tableView.setActionCommand("tableView");
+        tableView.addActionListener(eventHandler);
+        viewMenu.add(tableView);
         viewMenu.addSeparator();
         viewMenu.add(sortByMenu);
+        eventDateAscending.setActionCommand("eventDateAscending");
+        eventDateAscending.addActionListener(eventHandler);
         sortByMenu.add(eventDateAscending);
+        eventDateDescending.setActionCommand("eventDateDescending");
+        eventDateDescending.addActionListener(eventHandler);
         sortByMenu.add(eventDateDescending);
+        organiserSurnameAscending.setActionCommand("organiserSurnameAscending");
+        organiserSurnameAscending.addActionListener(eventHandler);
         sortByMenu.add(organiserSurnameAscending);
+        organiserSurnameDescending.setActionCommand("organiserSurnameDescending");
+        organiserSurnameDescending.addActionListener(eventHandler);
         sortByMenu.add(organiserSurnameDescending);
         //MIGRATE TO PANEL this.add(eventViewerTitle, BorderLayout.NORTH);
         this.add(menuBar, BorderLayout.NORTH);
         this.add(new ButtonPanel(), BorderLayout.SOUTH);
         this.add(new TabPanel(), BorderLayout.CENTER);
+        this.setVisible(true);
     }
     
 }
