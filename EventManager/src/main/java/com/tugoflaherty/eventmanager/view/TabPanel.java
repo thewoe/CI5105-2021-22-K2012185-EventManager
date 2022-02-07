@@ -16,16 +16,16 @@ import javax.swing.JTabbedPane;
 public class TabPanel extends JPanel {
     
     private JTabbedPane tabPane = new JTabbedPane();
-    private TextAreaPanel textAreaPanel0 = new TextAreaPanel();
-    private TextAreaPanel textAreaPanel1 = new TextAreaPanel();
-    private TextAreaPanel textAreaPanel2 = new TextAreaPanel();
+    private TextAreaPanel textAreaPanel = new TextAreaPanel();
+    private TextAreaPanel hierarchalPanel = new TextAreaPanel();
+    private TablePanel tablePanel = new TablePanel();
     
     public TabPanel() {
         this.setLayout(new BorderLayout());
-        tabPane.add("Text View",textAreaPanel0);
-        tabPane.add("Hierarchal View",textAreaPanel1);
-        tabPane.add("Table View",textAreaPanel2);
-        this.add(tabPane,BorderLayout.NORTH);
+        tabPane.add("Text View",textAreaPanel);
+        tabPane.add("Hierarchal View",hierarchalPanel);
+        tabPane.add("Table View",tablePanel);
+        this.add(tabPane,BorderLayout.CENTER);
     }
     
 }
