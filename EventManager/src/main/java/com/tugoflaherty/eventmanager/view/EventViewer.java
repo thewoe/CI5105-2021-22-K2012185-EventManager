@@ -7,6 +7,7 @@ package com.tugoflaherty.eventmanager.view;
 
 import com.tugoflaherty.eventmanager.controller.EventViewerController;
 import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -78,6 +79,8 @@ public class EventViewer extends JFrame {
     
     private EventViewer() {
         EventViewerController eventHandler = new EventViewerController();
+        ImageIcon icon = new ImageIcon("applicationIcon.jpg");
+        this.setIconImage(icon.getImage());
         this.setTitle("Event Viewer");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(400,0,575,425);
