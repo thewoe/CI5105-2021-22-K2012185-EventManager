@@ -14,11 +14,19 @@ import javax.swing.JTabbedPane;
  * @author tugso
  */
 public class TabPanel extends JPanel {
-    
+
     private JTabbedPane tabPane = new JTabbedPane();
     private TextAreaPanel textAreaPanel = new TextAreaPanel();
     private TextAreaPanel hierarchalPanel = new TextAreaPanel();
     private TablePanel tablePanel = new TablePanel();
+    
+    public JTabbedPane getTabPane() {
+        return tabPane;
+    }
+
+    public void setTabPane(JTabbedPane tabPane) {
+        this.tabPane = tabPane;
+    }
     
     public TabPanel() {
         this.setLayout(new BorderLayout());

@@ -20,6 +20,25 @@ import javax.swing.JMenuItem;
 public class EventViewer extends JFrame {
     
     private static EventViewer INSTANCE = new EventViewer();
+    
+    private ButtonPanel buttonPanel = new ButtonPanel();
+    private TabPanel tabPanel = new TabPanel();
+
+    public ButtonPanel getButtonPanel() {
+        return buttonPanel;
+    }
+
+    public void setButtonPanel(ButtonPanel buttonPanel) {
+        this.buttonPanel = buttonPanel;
+    }
+
+    public TabPanel getTabPanel() {
+        return tabPanel;
+    }
+
+    public void setTabPanel(TabPanel tabPanel) {
+        this.tabPanel = tabPanel;
+    }
     //MIGRATE TO PANEL private JLabel eventViewerTitle = new JLabel("Event Viewer");
     private JMenuBar menuBar = new JMenuBar();
     private JMenu fileMenu = new JMenu("File");
@@ -137,8 +156,8 @@ public class EventViewer extends JFrame {
         sortByMenu.add(organiserSurnameDescending);
         //MIGRATE TO PANEL this.add(eventViewerTitle, BorderLayout.NORTH);
         this.add(menuBar, BorderLayout.NORTH);
-        this.add(new ButtonPanel(), BorderLayout.SOUTH);
-        this.add(new TabPanel(), BorderLayout.CENTER);
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(tabPanel, BorderLayout.CENTER);
         this.setVisible(true);
     }
     
