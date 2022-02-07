@@ -7,6 +7,7 @@ package com.tugoflaherty.eventmanager.view;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,6 +19,7 @@ import javax.swing.JMenuItem;
 public class EventViewer extends JFrame {
     
     private static EventViewer INSTANCE = new EventViewer();
+    //MIGRATE TO PANEL private JLabel eventViewerTitle = new JLabel("Event Viewer");
     private JMenuBar menuBar = new JMenuBar();
     private JMenu fileMenu = new JMenu("File");
     private JMenu editMenu = new JMenu("Edit");
@@ -90,7 +92,10 @@ public class EventViewer extends JFrame {
         sortByMenu.add(eventDateDescending);
         sortByMenu.add(organiserSurnameAscending);
         sortByMenu.add(organiserSurnameDescending);
+        //MIGRATE TO PANEL this.add(eventViewerTitle, BorderLayout.NORTH);
         this.add(menuBar, BorderLayout.NORTH);
+        this.add(new ButtonPanel(), BorderLayout.SOUTH);
+        this.add(new TabPanel(), BorderLayout.CENTER);
     }
     
 }
