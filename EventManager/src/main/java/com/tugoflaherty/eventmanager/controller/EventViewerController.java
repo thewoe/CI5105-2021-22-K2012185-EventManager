@@ -30,6 +30,19 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "deleteOrganiser":
+            String selectedOrganiserTextToDelete = "";
+                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedOrganiserTextToDelete = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedOrganiserTextToDelete = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                int organiserIndexToDelete = eventManager.getSelectedOrganiser(selectedOrganiserTextToDelete);
+                if (organiserIndexToDelete != -1) {
+                eventManager.getOrganisers().remove(organiserIndexToDelete);
+                }
+                break;
             case "deleteEvent":
                 String selectedTextToDelete = "";
                 if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
