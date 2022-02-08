@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -25,6 +26,25 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "addOrganiser":
+                JTextField firstNameInputField = new JTextField();
+                JTextField surnameInputField = new JTextField();
+                Object[] organiserInputFields = {"First Name:", firstNameInputField, "Surname:", surnameInputField};
+                int addOrganiser = JOptionPane.showConfirmDialog(eventViewer, organiserInputFields, "Add Organiser", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if (addOrganiser == JOptionPane.OK_OPTION) {
+                    String firstNameTextInput = firstNameInputField.getText().trim();
+                    String surnameTextInput = surnameInputField.getText().trim();
+                    if (!firstNameTextInput.isEmpty() && !surnameTextInput.isEmpty()) {
+                        boolean organiserAdded = eventManager.addOrganiser(firstNameTextInput, surnameTextInput);
+                        if (organiserAdded == false) {
+                            int errorAddOrganiser = JOptionPane.showConfirmDialog(eventViewer, "Error adding organiser. Ensure there are no commas in the Organiser's First Name and Surname fields and it is not a duplicate organiser. Try again", "Error Adding Organiser", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else {
+                        int errorAddOrganiser = JOptionPane.showConfirmDialog(eventViewer, "Error adding organiser. Ensure no fields are empty. Try again", "Error Adding Organiser", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                break;
             case "saveFile":
                 JFileChooser saveFileChooser = new JFileChooser();
                 FileNameExtensionFilter saveFileFilter = new FileNameExtensionFilter("CSV Files", "csv");
