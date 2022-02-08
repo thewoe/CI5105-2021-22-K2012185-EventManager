@@ -456,20 +456,23 @@ public class EventManager implements Serializable {
         return index;
     }
     
-    public Item getSelectedItem(String selectedText) {
-        Item itemToReturn = null;
+    public int[] getSelectedItem(String selectedText) {
+        int[] selectedItemLocation = new int[1];
+        selectedItemLocation[0] = -1;
+        selectedItemLocation[1] = -1;
         String searchableText = selectedText.trim();
         String[] itemDetails = searchableText.split(" ");
         Item comparableItem = new Item(itemDetails[0], itemDetails[1]);
         for (int i=0; i<this.getEvents().size(); i++) {
             for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
                 if (comparableItem.equals(this.getEvents().get(i).getItems().get(j))) {
-                    itemToReturn = this.getEvents().get(i).getItems().get(j);
+                    selectedItemLocation[0] = i;
+                    selectedItemLocation[1] = j;
                     break;
                 }
             }
         }
-        return itemToReturn;
+        return selectedItemLocation;
     }
     
     public boolean editItem(Item item, String startTime, String itemTitle) {

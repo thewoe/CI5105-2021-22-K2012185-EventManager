@@ -6,6 +6,7 @@
 package com.tugoflaherty.eventmanager.controller;
 
 import com.tugoflaherty.eventmanager.model.EventManager;
+import com.tugoflaherty.eventmanager.model.Item;
 import com.tugoflaherty.eventmanager.model.Organiser;
 import com.tugoflaherty.eventmanager.view.EventViewer;
 import java.awt.event.ActionEvent;
@@ -30,8 +31,21 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "deleteItem":
+                String selectedItemTextToDelete = "";
+                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedItemTextToDelete = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedItemTextToDelete = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                int[] itemToDelete = eventManager.getSelectedItem(selectedItemTextToDelete);
+                if (itemToDelete[0] != -1 && itemToDelete[1] != -1) {
+                eventManager.getEvents().get(itemToDelete[0]).getItems().remove(itemToDelete[1]);
+                }
+                break;
             case "deleteOrganiser":
-            String selectedOrganiserTextToDelete = "";
+                String selectedOrganiserTextToDelete = "";
                 if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
                     selectedOrganiserTextToDelete = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
                 }
