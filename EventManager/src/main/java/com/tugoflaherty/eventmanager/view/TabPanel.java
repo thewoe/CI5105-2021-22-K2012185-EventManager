@@ -18,7 +18,6 @@ public class TabPanel extends JPanel {
     private JTabbedPane tabPane = new JTabbedPane();
     private TextAreaPanel textAreaPanel = new TextAreaPanel();
     private TextAreaPanel hierarchalPanel = new TextAreaPanel();
-    private TablePanel tablePanel = new TablePanel();
 
     public TextAreaPanel getHierarchalPanel() {
         return hierarchalPanel;
@@ -48,7 +47,6 @@ public class TabPanel extends JPanel {
         this.setLayout(new BorderLayout());
         tabPane.add("Text View",textAreaPanel);
         tabPane.add("Hierarchal View",hierarchalPanel);
-        tabPane.add("Table View",tablePanel);
         this.add(tabPane,BorderLayout.CENTER);
     }
     

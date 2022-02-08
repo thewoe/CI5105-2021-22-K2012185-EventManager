@@ -64,7 +64,7 @@ public class Organiser {
     
     @Override
     public String toString() {
-        return "Organiser{" + "firstName=" + this.getFirstName() + "lastName" + this.getLastName() + "}";
+        return this.getFirstName() + " " + this.getLastName();
     }
 
     @Override

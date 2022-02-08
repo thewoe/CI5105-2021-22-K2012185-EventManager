@@ -60,7 +60,6 @@ public class EventViewer extends JFrame {
     private JMenuItem editItem = new JMenuItem("Edit Item");
     private JMenuItem editOrganiser = new JMenuItem("Edit Organiser");
     private JMenuItem textView = new JMenuItem("Text View");
-    private JMenuItem tableView = new JMenuItem("Table View");
     private JMenuItem hierarchalView = new JMenuItem("Hierarchal View");
     private JMenuItem defaultOrder = new JMenuItem("Default");
     private JMenuItem eventDateAscending = new JMenuItem("Event Date (Ascending)");
@@ -137,9 +136,6 @@ public class EventViewer extends JFrame {
         hierarchalView.setActionCommand("hierarchalView");
         hierarchalView.addActionListener(eventHandler);
         viewMenu.add(hierarchalView);
-        tableView.setActionCommand("tableView");
-        tableView.addActionListener(eventHandler);
-        viewMenu.add(tableView);
         viewMenu.addSeparator();
         viewMenu.add(sortByMenu);
         defaultOrder.setActionCommand("defaultOrder");
