@@ -66,5 +66,7 @@ public class MainTest {
         //System.out.println(EventManagerTest.testAddDuplicateOrganisersContains());
         //System.out.println(EventManagerTest.testAddDuplicateItemsSize());
         //System.out.println(EventManagerTest.testAddDuplicateItemsContains());
+        //System.out.println(EventManagerTest.testAddDuplicateEventsSize());
+        //System.out.println(EventManagerTest.testAddDuplicateEventsContains());
     }
 }

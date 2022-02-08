@@ -93,27 +93,33 @@ public class EventManager implements Serializable {
     }
     
     public boolean addEvent(String title, Organiser organiser, String dateTime, String location, List<Item> items) {
-        Event newEvent = new Event(title, organiser, dateTime, location, items);
-        if (this.getEvents().contains(newEvent)) {
-            return false;
+        if (!title.contains(",") && !location.contains(",")) {
+            Event newEvent = new Event(title, organiser, dateTime, location, items);
+            if (!this.getEvents().contains(newEvent)) {
+                return this.getEvents().add(newEvent);
+            }
         }
-        return this.getEvents().add(newEvent);
+        return false;
     }
     
     public boolean addEvent(String title, Organiser organiser, String dateTime, String location) {
-        Event newEvent = new Event(title, organiser, dateTime, location);
-        if (this.getEvents().contains(newEvent)) {
-            return false;
+        if (!title.contains(",") && !location.contains(",")) {
+            Event newEvent = new Event(title, organiser, dateTime, location);
+            if (!this.getEvents().contains(newEvent)) {
+                return this.getEvents().add(newEvent);
+            }
         }
-        return this.getEvents().add(newEvent);
+        return false;
     }
     
     public boolean addEvent(String title, String dateTime, String location) {
-        Event newEvent = new Event(title, dateTime, location);
-        if (this.getEvents().contains(newEvent)) {
-            return false;
+        if (!title.contains(",") && !location.contains(",")) {
+            Event newEvent = new Event(title, dateTime, location);
+            if (!this.getEvents().contains(newEvent)) {
+                return this.getEvents().add(newEvent);
+            }
         }
-        return this.getEvents().add(newEvent);
+        return false;
     }
     
     public boolean deleteEvent(int eventIndex) {
@@ -143,7 +149,7 @@ public class EventManager implements Serializable {
     }
     
     public boolean addOrganiser(String firstName, String lastName) {
-        if (!firstName.contains(",") || !lastName.contains(",")) {
+        if (!firstName.contains(",") && !lastName.contains(",")) {
             Organiser newOrganiser = new Organiser(firstName, lastName);
             if (!this.getOrganisers().contains(newOrganiser)) {
                 return this.getOrganisers().add(newOrganiser);

@@ -436,4 +436,24 @@ public class EventManagerTest {
         }
         return true;
     }
+    
+    public static boolean testAddDuplicateEventsSize() {
+    EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Vaccination Booster","2022-02-08T12:32","Kingston");
+        eventManager.addEvent("Vaccination Booster","2022-02-08T12:32","Kingston");
+        if (eventManager.getEvents().size() == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testAddDuplicateEventsContains() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addEvent("Vaccination Booster","2022-02-08T12:32","Kingston");
+        eventManager.addEvent("Vaccination Booster","2022-02-08T12:32","Kingston");
+        if (eventManager.getEvents().size() == 2) {
+            return (eventManager.getEvents().get(0).equals(eventManager.getEvents().get(1)));
+        }
+        return true;
+    }
 }
