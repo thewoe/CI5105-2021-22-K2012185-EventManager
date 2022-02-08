@@ -20,6 +20,14 @@ public class TextAreaPanel extends JPanel {
     private JTextArea textAreaPanel = new JTextArea();
     private JScrollPane textAreaScrollPane = new JScrollPane(textAreaPanel);
     
+    public JTextArea getTextAreaPanel() {
+        return textAreaPanel;
+    }
+
+    public void setTextAreaPanel(JTextArea textAreaPanel) {
+        this.textAreaPanel = textAreaPanel;
+    }
+    
     public TextAreaPanel() {
         this.setLayout(new BorderLayout());
         this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));

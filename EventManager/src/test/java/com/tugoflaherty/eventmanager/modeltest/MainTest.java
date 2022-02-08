@@ -68,5 +68,7 @@ public class MainTest {
         //System.out.println(EventManagerTest.testAddDuplicateItemsContains());
         //System.out.println(EventManagerTest.testAddDuplicateEventsSize());
         //System.out.println(EventManagerTest.testAddDuplicateEventsContains());
+        //System.out.println(EventManagerTest.testTextViewData());
+        //System.out.println(EventManagerTest.testHierarchalViewData());
     }
 }

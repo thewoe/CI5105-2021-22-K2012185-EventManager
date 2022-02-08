@@ -456,4 +456,16 @@ public class EventManagerTest {
         }
         return true;
     }
+    
+    public static String testTextViewData() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.loadState();
+        return eventManager.textViewData();
+    }
+    
+    public static String testHierarchalViewData() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.loadState();
+        return eventManager.hierarchalViewData();
+    }
 }

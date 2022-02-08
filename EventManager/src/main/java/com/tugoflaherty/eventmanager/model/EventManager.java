@@ -378,6 +378,55 @@ public class EventManager implements Serializable {
         //try read file from "EventManagerState.csv"
         //Read "EventMangerState.csv" and put into state variable
         //Call readConfigFile with state variable
-        //Call the above method when application is first ru, to initialise the model
+        //Call the above method when application is first run, to initialise the model
+    }
+    
+    public String textViewData() {
+        String textViewString = "";
+        for (int i=0; i<this.getEvents().size(); i++) {
+            Event currentEvent = this.getEvents().get(i);
+            //System.out.println(currentEvent.toString());
+            textViewString = textViewString + (i+1) + " " + currentEvent.getTitle();
+            if (currentEvent.getOrganiser() != null) {
+                textViewString = textViewString + " organised by " + currentEvent.getOrganiser().getFirstName() + " " + currentEvent.getOrganiser().getLastName();
+            }
+            String dateTime = currentEvent.getDateTime().toString();
+            String[] dateTimeArray = dateTime.split("T");
+            textViewString = textViewString + " at " + dateTimeArray[0] + " at " + dateTimeArray[1] + " in " + currentEvent.getLocation() + " with agenda: ";
+            for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
+                Item currentItem = this.getEvents().get(i).getItems().get(j);
+                textViewString = textViewString + currentItem.getStartTime().toString() + " " + currentItem.getItemTitle();
+                if (j != this.getEvents().get(i).getItems().size() - 1) {
+                    textViewString = textViewString + ", ";
+                }
+                else if (j == this.getEvents().get(i).getItems().size() - 1) {
+                    textViewString = textViewString + System.lineSeparator();
+                }
+            }
+        }
+        return textViewString;
+    }
+    
+    public String hierarchalViewData() {
+        String hierarchalViewString = "";
+        for (int i=0; i<this.getEvents().size(); i++) {
+            Event currentEvent = this.getEvents().get(i);
+            //System.out.println(currentEvent.toString());
+            hierarchalViewString = hierarchalViewString + currentEvent.getTitle();
+            if (currentEvent.getOrganiser() != null) {
+                hierarchalViewString = hierarchalViewString + " organised by " + currentEvent.getOrganiser().getFirstName() + " " + currentEvent.getOrganiser().getLastName();
+            }
+            String dateTime = currentEvent.getDateTime().toString();
+            String[] dateTimeArray = dateTime.split("T");
+            hierarchalViewString = hierarchalViewString + " at " + dateTimeArray[0] + " at " + dateTimeArray[1] + " in " + currentEvent.getLocation() + System.lineSeparator();
+            for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
+                Item currentItem = this.getEvents().get(i).getItems().get(j);
+                hierarchalViewString = hierarchalViewString + "    " + currentItem.getStartTime().toString() + " " + currentItem.getItemTitle() + System.lineSeparator();
+                if (j == this.getEvents().get(i).getItems().size() - 1) {
+                    hierarchalViewString = hierarchalViewString + System.lineSeparator();
+                }
+            }
+        }
+        return hierarchalViewString;
     }
 }

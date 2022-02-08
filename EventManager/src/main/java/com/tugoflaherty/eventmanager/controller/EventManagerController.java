@@ -17,5 +17,7 @@ public class EventManagerController {
         EventManager eventManager = EventManager.getInstance();
         eventManager.loadState();
         EventViewer eventViewer = EventViewer.getInstance();
+        eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().setText(eventManager.textViewData());
+        eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().setText(eventManager.hierarchalViewData());
     }
 }

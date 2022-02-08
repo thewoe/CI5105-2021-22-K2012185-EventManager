@@ -19,6 +19,14 @@ public class TabPanel extends JPanel {
     private TextAreaPanel textAreaPanel = new TextAreaPanel();
     private TextAreaPanel hierarchalPanel = new TextAreaPanel();
     private TablePanel tablePanel = new TablePanel();
+
+    public TextAreaPanel getHierarchalPanel() {
+        return hierarchalPanel;
+    }
+
+    public void setHierarchalPanel(TextAreaPanel hierarchalPanel) {
+        this.hierarchalPanel = hierarchalPanel;
+    }
     
     public JTabbedPane getTabPane() {
         return tabPane;
@@ -26,6 +34,14 @@ public class TabPanel extends JPanel {
 
     public void setTabPane(JTabbedPane tabPane) {
         this.tabPane = tabPane;
+    }
+    
+    public TextAreaPanel getTextAreaPanel() {
+        return textAreaPanel;
+    }
+
+    public void setTextAreaPanel(TextAreaPanel textAreaPanel) {
+        this.textAreaPanel = textAreaPanel;
     }
     
     public TabPanel() {
