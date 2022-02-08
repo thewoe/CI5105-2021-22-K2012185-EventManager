@@ -56,7 +56,6 @@ public class EventViewer extends JFrame {
     private JMenuItem deleteItem = new JMenuItem("Delete Event Item");
     private JMenuItem deleteOrganiser = new JMenuItem("Delete Organiser");
     private JMenuItem associateEventOrganiser = new JMenuItem("Set Event Organiser");
-    private JMenuItem addItemsToEvent = new JMenuItem("Add Items To Event");
     private JMenuItem editEvent = new JMenuItem("Edit Event");
     private JMenuItem editItem = new JMenuItem("Edit Item");
     private JMenuItem editOrganiser = new JMenuItem("Edit Organiser");
@@ -122,9 +121,6 @@ public class EventViewer extends JFrame {
         associateEventOrganiser.setActionCommand("associateEventOrganiser");
         associateEventOrganiser.addActionListener(eventHandler);
         editMenu.add(associateEventOrganiser);
-        addItemsToEvent.setActionCommand("addItemsToEvent");
-        addItemsToEvent.addActionListener(eventHandler);
-        editMenu.add(addItemsToEvent);
         editMenu.addSeparator();
         deleteEvent.setActionCommand("deleteEvent");
         deleteEvent.addActionListener(eventHandler);

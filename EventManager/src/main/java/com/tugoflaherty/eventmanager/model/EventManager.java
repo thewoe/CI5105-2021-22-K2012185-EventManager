@@ -429,4 +429,59 @@ public class EventManager implements Serializable {
         }
         return hierarchalViewString;
     }
+    
+    public int getSelectedEvent(String selectedText) {
+        String searchableText = selectedText.trim();
+        int index = -1;
+        for (int i=0; i<this.getEvents().size(); i++) {
+            if (searchableText.equals(this.getEvents().get(i).getTitle())) {
+               index = i;
+               break;
+            }
+        }
+        return index;
+    }
+    
+    public int getSelectedOrganiser(String selectedText) {
+        int index = -1;
+        String searchableText = selectedText.trim();
+        String[] organiserDetails = searchableText.split(" ");
+        Organiser comparableOrganiser = new Organiser(organiserDetails[0], organiserDetails[1]);
+        for (int i=0; i<this.getOrganisers().size(); i++) {
+            if (comparableOrganiser.equals(this.getOrganisers().get(i))) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+    
+    public Item getSelectedItem(String selectedText) {
+        Item itemToReturn = null;
+        String searchableText = selectedText.trim();
+        String[] itemDetails = searchableText.split(" ");
+        Item comparableItem = new Item(itemDetails[0], itemDetails[1]);
+        for (int i=0; i<this.getEvents().size(); i++) {
+            for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
+                if (comparableItem.equals(this.getEvents().get(i).getItems().get(j))) {
+                    itemToReturn = this.getEvents().get(i).getItems().get(j);
+                    break;
+                }
+            }
+        }
+        return itemToReturn;
+    }
+    
+    public boolean editItem(Item item, String startTime, String itemTitle) {
+        if (item != null) {
+            if (!startTime.equals("")) {
+                item.setStartTime(startTime);
+            }
+            if (!itemTitle.equals("")) {
+                item.setItemTitle(itemTitle);
+            }
+            return true;
+        }
+        return false;
+    }
 }
