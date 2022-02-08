@@ -416,4 +416,24 @@ public class EventManagerTest {
         }
         return true;
     }
+    
+    public static boolean testAddDuplicateItemsSize() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addItem("09:00","Do Work");
+        eventManager.addItem("09:00","Do Work");
+        if (eventManager.getItems().size() == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testAddDuplicateItemsContains() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addItem("09:00","Do Work");
+        eventManager.addItem("09:00","Do Work");
+        if (eventManager.getItems().size() == 2) {
+            return (eventManager.getItems().get(0).equals(eventManager.getItems().get(1)));
+        }
+        return true;
+    }
 }

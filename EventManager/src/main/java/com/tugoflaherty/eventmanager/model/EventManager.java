@@ -125,8 +125,13 @@ public class EventManager implements Serializable {
     }
     
     public boolean addItem(String startTime, String itemTitle) {
-        Item newItem = new Item(startTime, itemTitle);
-        return this.getItems().add(newItem);
+        if (!itemTitle.contains(",")) {
+            Item newItem = new Item(startTime, itemTitle);
+            if (!this.getItems().contains(newItem)) {
+                return this.getItems().add(newItem);
+            }
+        }
+        return false;
     }
     
     public boolean deleteItem(int itemIndex) {
