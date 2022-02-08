@@ -6,6 +6,7 @@
 package com.tugoflaherty.eventmanager.controller;
 
 import com.tugoflaherty.eventmanager.model.EventManager;
+import com.tugoflaherty.eventmanager.view.EventViewer;
 
 /**
  *
@@ -14,5 +15,7 @@ import com.tugoflaherty.eventmanager.model.EventManager;
 public class EventManagerController {
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
+        eventManager.loadState();
+        EventViewer eventViewer = EventViewer.getInstance();
     }
 }

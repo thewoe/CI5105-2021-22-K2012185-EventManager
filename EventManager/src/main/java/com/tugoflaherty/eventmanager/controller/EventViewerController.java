@@ -31,12 +31,15 @@ public class EventViewerController implements ActionListener {
                 saveFileChooser.setFileFilter(saveFileFilter);
                 int saveFileOption = saveFileChooser.showSaveDialog(eventViewer);
                 if (saveFileOption == JFileChooser.APPROVE_OPTION) {
-                    File fileToSave = saveFileChooser.getSelectedFile();
-                    String saveFilePath = fileToSave.getAbsolutePath();
+                    File fileToSave;
+                    String saveFilePath;
+                    fileToSave = saveFileChooser.getSelectedFile();
+                    saveFilePath = fileToSave.getAbsolutePath();
                     eventManager.writeConfigFile(saveFilePath);
                     eventManager.writeOrganisersFile(saveFilePath);
                     eventManager.writeEventsFile(saveFilePath);
                     eventManager.writeItemsFile(saveFilePath);
+                    eventManager.saveState(saveFilePath);
                     System.out.println("Config File Path: " + saveFilePath);
                 }
                 break;

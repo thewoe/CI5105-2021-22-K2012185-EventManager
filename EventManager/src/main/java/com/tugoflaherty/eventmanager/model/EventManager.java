@@ -333,4 +333,38 @@ public class EventManager implements Serializable {
         this.getEvents().clear();
         this.getItems().clear();
     }
+    
+    public void saveState(String lastSavedPath) {
+        try(BufferedWriter bWriter = new BufferedWriter(new FileWriter("_EventManagerLastOpenedState_.csv"))) {
+            if (!lastSavedPath.isBlank()) {
+                String line = lastSavedPath + ".csv";
+                bWriter.write(line);
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error writing State file");	 	  	 	        	     	
+        }
+        //try write file to "EventManagerState.csv"
+        //Write lastSavedPTH to EventManagerState.csv
+        //call just before application exit in eventviewercontroller
+    }
+    
+    public void loadState() {
+        try(BufferedReader bReader = new BufferedReader(new FileReader("_EventManagerLastOpenedState_.csv"))) {
+            while (bReader.ready()) {
+                String line = bReader.readLine();
+                String fileList[] = line.trim().split(",");
+                if (!fileList[0].isBlank()) {
+                    this.readConfigFile(fileList[0]);
+                }
+            }
+        }	  		 	  	 	        	     	
+        catch (Exception o) {
+            System.out.println("Error reading State file");	 	  	 	        	     	
+        }
+        //try read file from "EventManagerState.csv"
+        //Read "EventMangerState.csv" and put into state variable
+        //Call readConfigFile with state variable
+        //Call the above method when application is first ru, to initialise the model
+    }
 }
