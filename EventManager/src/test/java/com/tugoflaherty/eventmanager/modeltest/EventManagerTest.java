@@ -396,4 +396,24 @@ public class EventManagerTest {
         }
         return false;
     }
+    
+    public static boolean testAddDuplicateOrganisersSize() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addOrganiser("Paul","Neve");
+        eventManager.addOrganiser("Paul","Neve");
+        if (eventManager.getOrganisers().size() == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean testAddDuplicateOrganisersContains() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addOrganiser("Paul","Neve");
+        eventManager.addOrganiser("Paul","Neve");
+        if (eventManager.getOrganisers().size() == 2) {
+            return (eventManager.getOrganisers().get(0).equals(eventManager.getOrganisers().get(1)));
+        }
+        return true;
+    }
 }

@@ -7,6 +7,7 @@ package com.tugoflaherty.eventmanager.model;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  *
@@ -86,6 +87,35 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" + "title=" + this.getItemTitle() + "time=" + this.getStartTime().toString() + "}";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.startTime);
+        hash = 97 * hash + Objects.hashCode(this.itemTitle);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Item other = (Item) obj;
+        if (!Objects.equals(this.itemTitle, other.itemTitle)) {
+            return false;
+        }
+        if (!Objects.equals(this.startTime, other.startTime)) {
+            return false;
+        }
+        return true;
     }
     
 }

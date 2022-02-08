@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -218,19 +219,42 @@ public class Event {
         return "Event{" + "title=" + this.getTitle() + "organiser=null" + "time=" + this.getDateTime().toString() + "location=" + this.getLocation() + "}";
 
     }
-    
-    @Override	  		 	  	 	        	     	
-    public int hashCode() {	  		 	  	 	        	     	
-      int returnValue = 13;	  		 	  	 	        	     	
-      if (title != null) {	  		 	  	 	        	     	
-        returnValue = 19 * returnValue  + title.hashCode();	  		 	  	 	        	     	
-      }	  		 	  	 	        	     	
-      return returnValue;	  		 	  	 	        	     	
-    }	  		 	  	 	        	     	
-	  		 	  	 	        	     	
-    @Override	  		 	  	 	        	     	
-    public boolean equals(Object o) {	  		 	  	 	        	     	
-      return title.equals(((Event)o).getTitle());  		 	  	 	        	     	
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.title);
+        hash = 29 * hash + Objects.hashCode(this.organiser);
+        hash = 29 * hash + Objects.hashCode(this.dateTime);
+        hash = 29 * hash + Objects.hashCode(this.location);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Event other = (Event) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.location, other.location)) {
+            return false;
+        }
+        if (!Objects.equals(this.organiser, other.organiser)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateTime, other.dateTime)) {
+            return false;
+        }
+        return true;
     }
     
 }

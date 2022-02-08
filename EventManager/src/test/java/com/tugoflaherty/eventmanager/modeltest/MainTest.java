@@ -62,5 +62,7 @@ public class MainTest {
         //System.out.println(EventManagerTest.testWriteOrganisersFile());
         //System.out.println(EventManagerTest.testWriteEventsFile());
         //System.out.println(EventManagerTest.testWriteItemsFile());
+        //System.out.println(EventManagerTest.testAddDuplicateOrganisersSize());
+        //System.out.println(EventManagerTest.testAddDuplicateOrganisersContains());
     }
 }

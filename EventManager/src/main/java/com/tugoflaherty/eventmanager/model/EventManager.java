@@ -138,11 +138,13 @@ public class EventManager implements Serializable {
     }
     
     public boolean addOrganiser(String firstName, String lastName) {
-        Organiser newOrganiser = new Organiser(firstName, lastName);
-        if (this.getOrganisers().contains(newOrganiser)) {
-            return false;
+        if (!firstName.contains(",") || !lastName.contains(",")) {
+            Organiser newOrganiser = new Organiser(firstName, lastName);
+            if (!this.getOrganisers().contains(newOrganiser)) {
+                return this.getOrganisers().add(newOrganiser);
+            }
         }
-        return this.getOrganisers().add(newOrganiser);
+        return false;
     }
     
     public boolean deleteOrganiser(int organiserIndex) {
