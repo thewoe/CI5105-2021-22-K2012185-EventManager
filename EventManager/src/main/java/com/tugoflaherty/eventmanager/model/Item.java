@@ -42,8 +42,13 @@ public class Item {
      * @param startTime This is the value of the startTime attribute to be set of type String
      * @throws DateTimeParseException This Exception is thrown if the String value cannot be converted to type LocalTime
      */
-    public void setStartTime(String startTime) throws DateTimeParseException {	  		 	  	 	        	     	
-        this.startTime = LocalTime.parse(startTime);	  		 	  	 	        	     	
+    public void setStartTime(String startTime) {	
+        try {
+            this.startTime = LocalTime.parse(startTime);
+        }
+        catch (DateTimeParseException dtpe) {
+            this.startTime = LocalTime.parse("00:00");
+        }	  		 	  	 	        	     	
     }
 
     /**
