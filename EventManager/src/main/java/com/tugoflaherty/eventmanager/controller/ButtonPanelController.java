@@ -6,9 +6,13 @@
 package com.tugoflaherty.eventmanager.controller;
 
 import com.tugoflaherty.eventmanager.model.EventManager;
+import com.tugoflaherty.eventmanager.model.Organiser;
 import com.tugoflaherty.eventmanager.view.EventViewer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -35,6 +39,46 @@ public class ButtonPanelController implements ActionListener {
                         boolean itemAdded = eventManager.addItem(startTimeTextInput, itemTitleTextInput);
                         if (itemAdded == false) {
                             int errorAddItem = JOptionPane.showConfirmDialog(eventViewer, "Error adding item. Ensure the Item Start Date is in the correct format, there are no commas in the Item's Title field, and it is not a duplicate Item. Try again", "Error Adding Item", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else {
+                        int errorAddOrganiser = JOptionPane.showConfirmDialog(eventViewer, "Error adding item. Ensure no fields are empty. Try again", "Error Adding Organiser", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                break;
+                case "addEvent":
+                JTextField titleInputField = new JTextField();
+                JTextField dateInputField = new JTextField();
+                JTextField timeInputField = new JTextField();
+                JTextField locationInputField = new JTextField();
+                List<String> organiserNames = new ArrayList();
+                organiserNames.add("No Organiser");
+                for (Organiser organiser : eventManager.getOrganisers())
+                {
+                    organiserNames.add(organiser.toString());
+                }
+                JComboBox organisersComboBox = new JComboBox(organiserNames.toArray());
+                Object[] eventInputFields = {"Title:", titleInputField, "Organiser:", organisersComboBox, "Date (YYYY-MM-DD):", dateInputField, "Time (24Hr HH:MM):", timeInputField, "Location:", locationInputField};
+                int addEvent = JOptionPane.showConfirmDialog(eventViewer, eventInputFields, "Add Event", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if (addEvent == JOptionPane.OK_OPTION) {
+                    String titleTextInput = titleInputField.getText().trim();
+                    int organiserIndex = organisersComboBox.getSelectedIndex();
+                    String dateTextInput = dateInputField.getText().trim();
+                    String timeTextInput = timeInputField.getText().trim();
+                    String dateTimeTextInput = dateTextInput+"T"+timeTextInput;
+                    String locationTextInput = locationInputField.getText().trim();
+                    if (!titleTextInput.isEmpty() && !dateTextInput.isEmpty() && !timeTextInput.isEmpty() && !locationTextInput.isEmpty()) {
+                        if (organiserIndex !=0) {
+                            boolean eventAdded = eventManager.addEvent(titleTextInput, eventManager.getOrganisers().get(organiserIndex-1), dateTimeTextInput, locationTextInput);
+                            if (eventAdded == false) {
+                                int errorAddEvent = JOptionPane.showConfirmDialog(eventViewer, "Error adding event. Ensure the Event Date and Time are in the correct format, there are no commas in the Item's Title and Location fields, and it is not a duplicate Item. Try again", "Error Adding Event", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        else {
+                            boolean eventAdded = eventManager.addEvent(titleTextInput, dateTimeTextInput, locationTextInput);
+                            if (eventAdded == false) {
+                                int errorAddEvent = JOptionPane.showConfirmDialog(eventViewer, "Error adding event. Ensure the Event Date and Time are in the correct format, there are no commas in the Item's Title and Location fields, and it is not a duplicate Item. Try again", "Error Adding Event", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
                     else {

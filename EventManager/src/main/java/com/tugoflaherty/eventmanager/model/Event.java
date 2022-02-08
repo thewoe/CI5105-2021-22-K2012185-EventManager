@@ -83,8 +83,13 @@ public class Event {
      * @param dateTime This is the value of the dateTime attribute to be set of type String
      * @throws DateTimeParseException This Exception is thrown if the String value cannot be converted to type LocalDateTime
      */
-    public void setDateTime(String dateTime) throws DateTimeParseException {	  		 	  	 	        	     	
-        this.dateTime = LocalDateTime.parse(dateTime);	  		 	  	 	        	     	
+    public void setDateTime(String dateTime) {
+        try {
+            this.dateTime = LocalDateTime.parse(dateTime);
+        }
+        catch (DateTimeParseException dtpe) {
+            this.dateTime = LocalDateTime.parse("1970-01-01T00:00");
+        } 		 	  	 	        	     	
     }
 
     /**
