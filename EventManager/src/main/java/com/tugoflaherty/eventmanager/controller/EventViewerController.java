@@ -31,6 +31,36 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "associateEventOrganiser":
+                String selectedEventToSetOrganiser = "";
+                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedEventToSetOrganiser = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedEventToSetOrganiser = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                int eventIndexToSetOrganiser = eventManager.getSelectedEvent(selectedEventToSetOrganiser);
+                if (eventIndexToSetOrganiser != -1) {
+                    List<String> organiserNamesToSet = new ArrayList();
+                    organiserNamesToSet.add("No Organiser");
+                    for (Organiser organiser : eventManager.getOrganisers())
+                    {
+                        organiserNamesToSet.add(organiser.toString());
+                    }
+                    JComboBox setOrganisersComboBox = new JComboBox(organiserNamesToSet.toArray());
+                    Object[] setOrganiserInputFields = {"Organiser:", setOrganisersComboBox};
+                    int setOrganiser = JOptionPane.showConfirmDialog(eventViewer, setOrganiserInputFields, "Set Event Organiser", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                    if (setOrganiser == JOptionPane.OK_OPTION) {
+                        int setOrganiserIndex = setOrganisersComboBox.getSelectedIndex();
+                        if (setOrganiserIndex != 0) {
+                            eventManager.associateOrganiserToEvent(eventIndexToSetOrganiser, setOrganiserIndex);
+                        }
+                        else {
+                            eventManager.getEvents().get(eventIndexToSetOrganiser).setOrganiser(null);
+                        }
+                    }
+                }
+                break;
             case "deleteItem":
                 String selectedItemTextToDelete = "";
                 if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
