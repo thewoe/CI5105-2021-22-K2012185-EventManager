@@ -30,6 +30,18 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "organiserSurnameDescending":
+                eventManager.sortEventsByOrganiserSurnameDescending();
+                break;
+            case "organiserSurnameAscending":
+                eventManager.sortEventsByOrganiserSurnameAscending();
+                break;
+            case "eventDateDescending":
+                eventManager.sortEventsByDateTimeDescending();
+                break;
+            case "eventDateAscending":
+                eventManager.sortEventsByDateTimeAscending();
+                break;
             case "editOrganiser":
                 String selectedOrganiserTextToEdit = "";
                 if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
@@ -75,6 +87,7 @@ public class EventViewerController implements ActionListener {
                         }
                     }
                 }
+                eventManager.sortItemsByStartTime();
                 break;
             case "editEvent":
                 String selectedEventToEdit = "";
@@ -153,6 +166,7 @@ public class EventViewerController implements ActionListener {
                 if (itemToDelete[0] != -1 && itemToDelete[1] != -1) {
                     eventManager.getEvents().get(itemToDelete[0]).getItems().remove(itemToDelete[1]);
                 }
+                eventManager.sortItemsByStartTime();
                 break;
             case "deleteOrganiser":
                 String selectedOrganiserTextToDelete = "";
@@ -248,6 +262,7 @@ public class EventViewerController implements ActionListener {
                         }
                     }
                 }
+                eventManager.sortItemsByStartTime();
                 break;
             case "addOrganiser":
                 JTextField firstNameInputField = new JTextField();

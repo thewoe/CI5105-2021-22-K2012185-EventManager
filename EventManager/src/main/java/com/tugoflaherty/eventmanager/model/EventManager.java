@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -501,5 +503,30 @@ public class EventManager implements Serializable {
             return true;
         }
         return false;
+    }
+    
+    public void sortEventsByOrganiserSurnameAscending(){
+        Collections.sort(this.getEvents(), Event.BY_ORGANISERSURNAME);
+    }
+    
+    public void sortEventsByOrganiserSurnameDescending() {
+        Collections.sort(this.getEvents(), Event.BY_ORGANISERSURNAME);
+        Collections.reverse(this.getEvents());
+    }
+    
+    public void sortEventsByDateTimeAscending() {
+        Collections.sort(this.getEvents(), Event.BY_DATE);
+    }
+    
+    public void sortEventsByDateTimeDescending() {
+        Collections.sort(this.getEvents(), Event.BY_DATE);
+        Collections.reverse(this.getEvents());
+    }
+    
+    public void sortItemsByStartTime() {
+        for (int i=0; i<this.getEvents().size(); i++)
+        {
+            Collections.sort(this.getEvents().get(i).getItems(), Item.BY_TIME);
+        }
     }
 }

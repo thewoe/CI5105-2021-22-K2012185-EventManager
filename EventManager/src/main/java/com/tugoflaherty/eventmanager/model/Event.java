@@ -5,23 +5,27 @@
  */
 package com.tugoflaherty.eventmanager.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
  *
  * @author tugoflaherty
  */
-public class Event {
+public class Event implements Comparable<Event>, Serializable {
     
     private String title;
     private Organiser organiser;
     private LocalDateTime dateTime;
     private String location;
     private List<Item> items = new ArrayList();
+    public static Comparator<Event> BY_DATE = new ByDateTime();
+    public static Comparator<Event> BY_ORGANISERSURNAME = new ByOrganiserSurname();
 
     /**
      * This method is a getter to return the title attribute as type String
@@ -224,6 +228,11 @@ public class Event {
         return "Event{" + "title=" + this.getTitle() + "organiser=null" + "time=" + this.getDateTime().toString() + "location=" + this.getLocation() + "}";
 
     }
+    
+    @Override
+    public int compareTo(Event event) {
+        return title.compareTo(event.getTitle());
+    }
 
     @Override
     public int hashCode() {
@@ -261,5 +270,20 @@ public class Event {
         }
         return true;
     }
+    
+    private static class ByDateTime implements Comparator<Event>{
+        @Override
+        public int compare(Event event1, Event event2) {
+            return event1.getDateTime().compareTo(event2.getDateTime());
+        }
+    }
+    
+    private static class ByOrganiserSurname implements Comparator<Event>{
+        @Override
+        public int compare(Event member1, Event member2) {
+            return member1.getOrganiser().getLastName().compareTo(member2.getOrganiser().getLastName());
+        }
+    }
+    
     
 }

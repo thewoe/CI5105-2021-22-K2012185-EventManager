@@ -5,18 +5,21 @@
  */
 package com.tugoflaherty.eventmanager.model;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
  *
  * @author tugoflaherty
  */
-public class Item {
+public class Item implements Comparable<Item>, Serializable {
     
     private LocalTime startTime;
     private String itemTitle;
+    public static Comparator<Item> BY_TIME = new Item.ByStartTime();
 
     /**
      * This method is a getter to return the startTime attribute as type LocalTime
@@ -93,6 +96,11 @@ public class Item {
     public String toString() {
         return "Item{" + "title=" + this.getItemTitle() + "time=" + this.getStartTime().toString() + "}";
     }
+    
+    @Override
+    public int compareTo(Item item) {
+        return startTime.compareTo(item.getStartTime());
+    }
 
     @Override
     public int hashCode() {
@@ -121,6 +129,13 @@ public class Item {
             return false;
         }
         return true;
+    }
+    
+    private static class ByStartTime implements Comparator<Item>{
+        @Override
+        public int compare(Item item1, Item item2) {
+            return item1.getStartTime().compareTo(item2.getStartTime());
+        }
     }
     
 }
