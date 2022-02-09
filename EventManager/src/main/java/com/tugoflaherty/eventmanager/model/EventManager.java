@@ -488,4 +488,18 @@ public class EventManager implements Serializable {
         }
         return false;
     }
+    
+    public boolean editOrganiser(int organiserIndex, String firstName, String lastName) {
+        Organiser organiserToEdit = this.getOrganisers().get(organiserIndex);
+        if (organiserToEdit != null) {
+            if (!firstName.equals("")) {
+                organiserToEdit.setFirstName(firstName);
+            }
+            if (!lastName.equals("")) {
+                organiserToEdit.setLastName(lastName);
+            }
+            return true;
+        }
+        return false;
+    }
 }

@@ -6,7 +6,6 @@
 package com.tugoflaherty.eventmanager.controller;
 
 import com.tugoflaherty.eventmanager.model.EventManager;
-import com.tugoflaherty.eventmanager.model.Item;
 import com.tugoflaherty.eventmanager.model.Organiser;
 import com.tugoflaherty.eventmanager.view.EventViewer;
 import java.awt.event.ActionEvent;
@@ -31,6 +30,29 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "editOrganiser":
+                String selectedOrganiserTextToEdit = "";
+                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedOrganiserTextToEdit = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedOrganiserTextToEdit = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                int organiserToEdit = eventManager.getSelectedOrganiser(selectedOrganiserTextToEdit);
+                if (organiserToEdit != -1) {
+                    JTextField editFirstNameInputField = new JTextField();
+                    JTextField editSurnameInputField = new JTextField();
+                    Object[] editOrganiserInputFields = {"New First Name:", editFirstNameInputField, "New Surname:", editSurnameInputField};
+                    int editOrganiser = JOptionPane.showConfirmDialog(eventViewer, editOrganiserInputFields, "Edit Organiser", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                    if (editOrganiser == JOptionPane.OK_OPTION) {
+                        String editFirstNameTextInput = editFirstNameInputField.getText().trim();
+                        String editSurnameTextInput = editSurnameInputField.getText().trim();
+                        if (!editFirstNameTextInput.isEmpty() && !editSurnameTextInput.isEmpty()) {
+                            boolean organiserEdited = eventManager.editOrganiser(organiserToEdit,editFirstNameTextInput, editSurnameTextInput);
+                        }
+                    }
+                }
+                break;
             case "editItem":
                 String selectedItemTextToEdit = "";
                 if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
