@@ -5,6 +5,7 @@
  */
 package com.tugoflaherty.eventmanager.model;
 
+import com.tugoflaherty.eventmanager.view.EventViewer;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -505,12 +506,12 @@ public class EventManager implements Serializable {
         return false;
     }
     
-    public void sortEventsByOrganiserSurnameAscending(){
-        Collections.sort(this.getEvents(), Event.BY_ORGANISERSURNAME);
+    public void sortEventsByEventTitleAscending(){
+        Collections.sort(this.getEvents(), Event.BY_EVENTTITLE);
     }
     
-    public void sortEventsByOrganiserSurnameDescending() {
-        Collections.sort(this.getEvents(), Event.BY_ORGANISERSURNAME);
+    public void sortEventsByEventTitleDescending() {
+        Collections.sort(this.getEvents(), Event.BY_EVENTTITLE);
         Collections.reverse(this.getEvents());
     }
     
@@ -528,5 +529,11 @@ public class EventManager implements Serializable {
         {
             Collections.sort(this.getEvents().get(i).getItems(), Item.BY_TIME);
         }
+    }
+    
+    public void modelModified() {
+        EventViewer eventViewer = EventViewer.getInstance();
+        eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().setText(this.textViewData());
+        eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().setText(this.hierarchalViewData());
     }
 }

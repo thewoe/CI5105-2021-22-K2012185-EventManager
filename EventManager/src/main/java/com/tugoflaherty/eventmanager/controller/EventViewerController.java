@@ -30,17 +30,21 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
-            case "organiserSurnameDescending":
-                eventManager.sortEventsByOrganiserSurnameDescending();
+            case "eventTitleDescending":
+                eventManager.sortEventsByEventTitleDescending();
+                eventManager.modelModified();
                 break;
-            case "organiserSurnameAscending":
-                eventManager.sortEventsByOrganiserSurnameAscending();
+            case "eventTitleAscending":
+                eventManager.sortEventsByEventTitleAscending();
+                eventManager.modelModified();
                 break;
             case "eventDateDescending":
                 eventManager.sortEventsByDateTimeDescending();
+                eventManager.modelModified();
                 break;
             case "eventDateAscending":
                 eventManager.sortEventsByDateTimeAscending();
+                eventManager.modelModified();
                 break;
             case "editOrganiser":
                 String selectedOrganiserTextToEdit = "";
@@ -64,6 +68,7 @@ public class EventViewerController implements ActionListener {
                         }
                     }
                 }
+                eventManager.modelModified();
                 break;
             case "editItem":
                 String selectedItemTextToEdit = "";
@@ -88,6 +93,7 @@ public class EventViewerController implements ActionListener {
                     }
                 }
                 eventManager.sortItemsByStartTime();
+                eventManager.modelModified();
                 break;
             case "editEvent":
                 String selectedEventToEdit = "";
@@ -123,6 +129,7 @@ public class EventViewerController implements ActionListener {
                         }
                     }
                 }
+                eventManager.modelModified();
                 break;
             case "associateEventOrganiser":
                 String selectedEventToSetOrganiser = "";
@@ -153,6 +160,7 @@ public class EventViewerController implements ActionListener {
                         }
                     }
                 }
+                eventManager.modelModified();
                 break;
             case "deleteItem":
                 String selectedItemTextToDelete = "";
@@ -167,6 +175,7 @@ public class EventViewerController implements ActionListener {
                     eventManager.getEvents().get(itemToDelete[0]).getItems().remove(itemToDelete[1]);
                 }
                 eventManager.sortItemsByStartTime();
+                eventManager.modelModified();
                 break;
             case "deleteOrganiser":
                 String selectedOrganiserTextToDelete = "";
@@ -180,6 +189,7 @@ public class EventViewerController implements ActionListener {
                 if (organiserIndexToDelete != -1) {
                 eventManager.getOrganisers().remove(organiserIndexToDelete);
                 }
+                eventManager.modelModified();
                 break;
             case "deleteEvent":
                 String selectedTextToDelete = "";
@@ -193,6 +203,7 @@ public class EventViewerController implements ActionListener {
                 if (eventIndexToDelete != -1) {
                 eventManager.getEvents().remove(eventIndexToDelete);
                 }
+                eventManager.modelModified();
                 break;
             case "addEvent":
                 JTextField titleInputField = new JTextField();
@@ -233,6 +244,7 @@ public class EventViewerController implements ActionListener {
                         int errorAddOrganiser = JOptionPane.showConfirmDialog(eventViewer, "Error adding item. Ensure no fields are empty. Try again", "Error Adding Organiser", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                eventManager.modelModified();
                 break;
             case "addItem":
                 String selectedText = "";
@@ -263,6 +275,7 @@ public class EventViewerController implements ActionListener {
                     }
                 }
                 eventManager.sortItemsByStartTime();
+                eventManager.modelModified();
                 break;
             case "addOrganiser":
                 JTextField firstNameInputField = new JTextField();
@@ -282,6 +295,7 @@ public class EventViewerController implements ActionListener {
                         int errorAddOrganiser = JOptionPane.showConfirmDialog(eventViewer, "Error adding organiser. Ensure no fields are empty. Try again", "Error Adding Organiser", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                eventManager.modelModified();
                 break;
             case "saveFile":
                 JFileChooser saveFileChooser = new JFileChooser();
@@ -316,15 +330,13 @@ public class EventViewerController implements ActionListener {
                         System.out.println("Config File Path: " + openFilePath);
                     }
                 }
+                eventManager.modelModified();
                 break;
             case "textView":
                 eventViewer.getTabPanel().getTabPane().setSelectedIndex(0);
                 break;
             case "hierarchalView":
                 eventViewer.getTabPanel().getTabPane().setSelectedIndex(1);
-                break;
-            case "tableView":
-                eventViewer.getTabPanel().getTabPane().setSelectedIndex(2);
                 break;
             case "quitApplication":
                 System.exit(0);

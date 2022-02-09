@@ -39,6 +39,7 @@ public class ButtonPanelController implements ActionListener {
                 if (eventIndexToDelete != -1) {
                 eventManager.getEvents().remove(eventIndexToDelete);
                 }
+                eventManager.modelModified();
                 break;
             case "addItem":
                 String selectedText = "";
@@ -68,6 +69,7 @@ public class ButtonPanelController implements ActionListener {
                         }
                     }
                 }
+                eventManager.modelModified();
                 break;
                 case "addEvent":
                 JTextField titleInputField = new JTextField();
@@ -108,6 +110,7 @@ public class ButtonPanelController implements ActionListener {
                         int errorAddOrganiser = JOptionPane.showConfirmDialog(eventViewer, "Error adding item. Ensure no fields are empty. Try again", "Error Adding Organiser", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                eventManager.modelModified();
                 break;
         }
     }

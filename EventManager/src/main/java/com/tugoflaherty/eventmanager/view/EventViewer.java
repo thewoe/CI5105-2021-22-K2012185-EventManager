@@ -61,11 +61,10 @@ public class EventViewer extends JFrame {
     private JMenuItem editOrganiser = new JMenuItem("Edit Organiser");
     private JMenuItem textView = new JMenuItem("Text View");
     private JMenuItem hierarchalView = new JMenuItem("Hierarchal View");
-    private JMenuItem defaultOrder = new JMenuItem("Default");
     private JMenuItem eventDateAscending = new JMenuItem("Event Date (Ascending)");
     private JMenuItem eventDateDescending = new JMenuItem("Event Date (Descending)");
-    private JMenuItem organiserSurnameAscending = new JMenuItem("Organiser Surname (Ascending)");
-    private JMenuItem organiserSurnameDescending = new JMenuItem("Organiser Surname (Descending)");
+    private JMenuItem eventTitleAscending = new JMenuItem("Event Title (Ascending)");
+    private JMenuItem eventTitleDescending = new JMenuItem("Event Title (Descending)");
     
     public static EventViewer getInstance() {
         if (INSTANCE==null) {
@@ -138,21 +137,18 @@ public class EventViewer extends JFrame {
         viewMenu.add(hierarchalView);
         viewMenu.addSeparator();
         viewMenu.add(sortByMenu);
-        defaultOrder.setActionCommand("defaultOrder");
-        defaultOrder.addActionListener(eventHandler);
-        sortByMenu.add(defaultOrder);
         eventDateAscending.setActionCommand("eventDateAscending");
         eventDateAscending.addActionListener(eventHandler);
         sortByMenu.add(eventDateAscending);
         eventDateDescending.setActionCommand("eventDateDescending");
         eventDateDescending.addActionListener(eventHandler);
         sortByMenu.add(eventDateDescending);
-        organiserSurnameAscending.setActionCommand("organiserSurnameAscending");
-        organiserSurnameAscending.addActionListener(eventHandler);
-        sortByMenu.add(organiserSurnameAscending);
-        organiserSurnameDescending.setActionCommand("organiserSurnameDescending");
-        organiserSurnameDescending.addActionListener(eventHandler);
-        sortByMenu.add(organiserSurnameDescending);
+        eventTitleAscending.setActionCommand("eventTitleAscending");
+        eventTitleAscending.addActionListener(eventHandler);
+        sortByMenu.add(eventTitleAscending);
+        eventTitleDescending.setActionCommand("eventTitleDescending");
+        eventTitleDescending.addActionListener(eventHandler);
+        sortByMenu.add(eventTitleDescending);
         //MIGRATE TO PANEL this.add(eventViewerTitle, BorderLayout.NORTH);
         this.add(menuBar, BorderLayout.NORTH);
         this.add(buttonPanel, BorderLayout.SOUTH);

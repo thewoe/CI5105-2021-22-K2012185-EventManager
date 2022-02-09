@@ -25,7 +25,7 @@ public class Event implements Comparable<Event>, Serializable {
     private String location;
     private List<Item> items = new ArrayList();
     public static Comparator<Event> BY_DATE = new ByDateTime();
-    public static Comparator<Event> BY_ORGANISERSURNAME = new ByOrganiserSurname();
+    public static Comparator<Event> BY_EVENTTITLE = new ByEventTitle();
 
     /**
      * This method is a getter to return the title attribute as type String
@@ -278,10 +278,10 @@ public class Event implements Comparable<Event>, Serializable {
         }
     }
     
-    private static class ByOrganiserSurname implements Comparator<Event>{
+    private static class ByEventTitle implements Comparator<Event>{
         @Override
-        public int compare(Event member1, Event member2) {
-            return member1.getOrganiser().getLastName().compareTo(member2.getOrganiser().getLastName());
+        public int compare(Event event1, Event event2) {
+            return event1.getTitle().compareTo(event2.getTitle());
         }
     }
     
