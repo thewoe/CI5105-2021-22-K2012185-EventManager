@@ -31,6 +31,41 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "editEvent":
+                String selectedEventToEdit = "";
+                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedEventToEdit = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
+                    selectedEventToEdit = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
+                }
+                int eventIndexToEdit = eventManager.getSelectedEvent(selectedEventToEdit);
+                if (eventIndexToEdit != -1) {
+                    JTextField editTitleInputField = new JTextField();
+                    JTextField editDateInputField = new JTextField();
+                    JTextField editTimeInputField = new JTextField();
+                    JTextField editLocationInputField = new JTextField();
+                    List<String> editOrganiserNames = new ArrayList();
+                    editOrganiserNames.add("No Organiser");
+                    for (Organiser organiser : eventManager.getOrganisers())
+                    {
+                        editOrganiserNames.add(organiser.toString());
+                    }
+                    Object[] editEventInputFields = {"Date and Time must always be entered together", "New Title:", editTitleInputField, "New Date (YYYY-MM-DD):", editDateInputField, "New Time (24Hr HH:MM):", editTimeInputField, "New Location:", editLocationInputField};
+                    int editEvent = JOptionPane.showConfirmDialog(eventViewer, editEventInputFields, "Edit Event", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                    if (editEvent == JOptionPane.OK_OPTION) {
+                        String editTitleTextInput = editTitleInputField.getText().trim();
+                        String editDateTextInput = editDateInputField.getText().trim();
+                        String editTimeTextInput = editTimeInputField.getText().trim();
+                        String editDateTimeTextInput = editDateTextInput+"T"+editTimeTextInput;
+                        String editLocationTextInput = editLocationInputField.getText().trim();
+                        boolean eventEdited = eventManager.editEventDetails(eventIndexToEdit, editTitleTextInput, editDateTimeTextInput, editLocationTextInput);
+                        if (eventEdited == false) {
+                            int errorEditingEvent = JOptionPane.showConfirmDialog(eventViewer, "Error editing event. Ensure the Event Date and Time are in the correct format, there are no commas in the Event Title and Location fields, and it is not a duplicate Event. Try again", "Error Editing Event", JOptionPane.CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                break;
             case "associateEventOrganiser":
                 String selectedEventToSetOrganiser = "";
                 if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
