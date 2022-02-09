@@ -475,13 +475,14 @@ public class EventManager implements Serializable {
         return selectedItemLocation;
     }
     
-    public boolean editItem(Item item, String startTime, String itemTitle) {
-        if (item != null) {
+    public boolean editItem(int eventIndex, int itemIndex, String startTime, String itemTitle) {
+        Item itemToEdit = this.getEvents().get(eventIndex).getItems().get(itemIndex);
+        if (itemToEdit != null) {
             if (!startTime.equals("")) {
-                item.setStartTime(startTime);
+                itemToEdit.setStartTime(startTime);
             }
             if (!itemTitle.equals("")) {
-                item.setItemTitle(itemTitle);
+                itemToEdit.setItemTitle(itemTitle);
             }
             return true;
         }
