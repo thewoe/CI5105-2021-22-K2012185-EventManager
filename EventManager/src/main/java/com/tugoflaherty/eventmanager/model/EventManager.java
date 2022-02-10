@@ -554,4 +554,16 @@ public class EventManager implements Serializable {
         this.getItems().clear();
         this.getOrganisers().clear();
     }
+    
+    public String getTextUserSelects() {
+        EventViewer eventViewer = EventViewer.getInstance();
+        String textUserSelects = "";
+        if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
+            textUserSelects = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
+        }
+        if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
+            textUserSelects = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
+        }
+        return textUserSelects;
+    }
 }

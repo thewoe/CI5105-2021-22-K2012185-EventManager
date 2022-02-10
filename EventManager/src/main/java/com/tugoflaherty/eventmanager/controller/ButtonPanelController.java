@@ -28,28 +28,14 @@ public class ButtonPanelController implements ActionListener {
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
             case "deleteEvent":
-                String selectedTextToDelete = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedTextToDelete = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedTextToDelete = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int eventIndexToDelete = eventManager.getSelectedEvent(selectedTextToDelete);
+                int eventIndexToDelete = eventManager.getSelectedEvent(eventManager.getTextUserSelects());
                 if (eventIndexToDelete != -1) {
                 eventManager.getEvents().remove(eventIndexToDelete);
                 }
                 eventManager.modelModified();
                 break;
             case "addItem":
-                String selectedText = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedText = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedText = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int eventIndex = eventManager.getSelectedEvent(selectedText);
+                int eventIndex = eventManager.getSelectedEvent(eventManager.getTextUserSelects());
                 if (eventIndex != -1) {
                     JTextField startTimeInputField = new JTextField();
                     JTextField itemTitleInputField = new JTextField();

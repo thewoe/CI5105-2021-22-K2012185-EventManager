@@ -9,7 +9,6 @@ import com.tugoflaherty.eventmanager.controller.EventViewerController;
 import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -55,7 +54,6 @@ public class EventViewer extends JFrame {
     private JMenuItem quitApplication = new JMenuItem("Exit");
     private JMenuItem deleteEvent = new JMenuItem("Delete Event");
     private JMenuItem deleteItem = new JMenuItem("Delete Event Item");
-    private JMenuItem deleteOrganiser = new JMenuItem("Delete Organiser");
     private JMenuItem associateEventOrganiser = new JMenuItem("Set Event Organiser");
     private JMenuItem editEvent = new JMenuItem("Edit Event");
     private JMenuItem editItem = new JMenuItem("Edit Item");
@@ -130,9 +128,6 @@ public class EventViewer extends JFrame {
         deleteItem.setActionCommand("deleteItem");
         deleteItem.addActionListener(eventHandler);
         editMenu.add(deleteItem);
-        deleteOrganiser.setActionCommand("deleteOrganiser");
-        deleteOrganiser.addActionListener(eventHandler);
-        editMenu.add(deleteOrganiser);
         textView.setActionCommand("textView");
         textView.addActionListener(eventHandler);
         viewMenu.add(textView);

@@ -58,14 +58,7 @@ public class EventViewerController implements ActionListener {
                 eventManager.modelModified();
                 break;
             case "editOrganiser":
-                String selectedOrganiserTextToEdit = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedOrganiserTextToEdit = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedOrganiserTextToEdit = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int organiserToEdit = eventManager.getSelectedOrganiser(selectedOrganiserTextToEdit);
+                int organiserToEdit = eventManager.getSelectedOrganiser(eventManager.getTextUserSelects());
                 if (organiserToEdit != -1) {
                     JTextField editFirstNameInputField = new JTextField();
                     JTextField editSurnameInputField = new JTextField();
@@ -82,14 +75,7 @@ public class EventViewerController implements ActionListener {
                 eventManager.modelModified();
                 break;
             case "editItem":
-                String selectedItemTextToEdit = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedItemTextToEdit = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedItemTextToEdit = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int[] itemToEdit = eventManager.getSelectedItem(selectedItemTextToEdit);
+                int[] itemToEdit = eventManager.getSelectedItem(eventManager.getTextUserSelects());
                 if (itemToEdit[0] != -1 && itemToEdit[1] != -1) {
                     JTextField editStartTimeInputField = new JTextField();
                     JTextField editItemTitleInputField = new JTextField();
@@ -107,14 +93,7 @@ public class EventViewerController implements ActionListener {
                 eventManager.modelModified();
                 break;
             case "editEvent":
-                String selectedEventToEdit = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedEventToEdit = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedEventToEdit = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int eventIndexToEdit = eventManager.getSelectedEvent(selectedEventToEdit);
+                int eventIndexToEdit = eventManager.getSelectedEvent(eventManager.getTextUserSelects());
                 if (eventIndexToEdit != -1) {
                     JTextField editTitleInputField = new JTextField();
                     JTextField editDateInputField = new JTextField();
@@ -143,14 +122,7 @@ public class EventViewerController implements ActionListener {
                 eventManager.modelModified();
                 break;
             case "associateEventOrganiser":
-                String selectedEventToSetOrganiser = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedEventToSetOrganiser = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedEventToSetOrganiser = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int eventIndexToSetOrganiser = eventManager.getSelectedEvent(selectedEventToSetOrganiser);
+                int eventIndexToSetOrganiser = eventManager.getSelectedEvent(eventManager.getTextUserSelects());
                 if (eventIndexToSetOrganiser != -1) {
                     List<String> organiserNamesToSet = new ArrayList();
                     organiserNamesToSet.add("No Organiser");
@@ -174,50 +146,15 @@ public class EventViewerController implements ActionListener {
                 eventManager.modelModified();
                 break;
             case "deleteItem":
-                String selectedItemTextToDelete = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedItemTextToDelete = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedItemTextToDelete = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int[] itemToDelete = eventManager.getSelectedItem(selectedItemTextToDelete);
+                int[] itemToDelete = eventManager.getSelectedItem(eventManager.getTextUserSelects());
                 if (itemToDelete[0] != -1 && itemToDelete[1] != -1) {
                     eventManager.getEvents().get(itemToDelete[0]).getItems().remove(itemToDelete[1]);
                 }
                 eventManager.sortItemsByStartTime();
                 eventManager.modelModified();
                 break;
-            case "deleteOrganiser":
-                String selectedOrganiserTextToDelete = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedOrganiserTextToDelete = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedOrganiserTextToDelete = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int organiserIndexToDelete = eventManager.getSelectedOrganiser(selectedOrganiserTextToDelete);
-                if (organiserIndexToDelete != -1) {
-                    for (int i=0; i<eventManager.getEvents().size(); i++) {
-                        for (int j=0; j<eventManager.getOrganisers().size(); j++) {
-                            if (eventManager.getOrganisers().get(j).equals(eventManager.getEvents().get(i).getOrganiser())) {
-                                eventManager.getEvents().get(i).setOrganiser(null);
-                            }
-                        }
-                    }
-                    eventManager.getOrganisers().remove(organiserIndexToDelete);
-                }
-                eventManager.modelModified();
-                break;
             case "deleteEvent":
-                String selectedTextToDelete = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedTextToDelete = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedTextToDelete = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int eventIndexToDelete = eventManager.getSelectedEvent(selectedTextToDelete);
+                int eventIndexToDelete = eventManager.getSelectedEvent(eventManager.getTextUserSelects());
                 if (eventIndexToDelete != -1) {
                 eventManager.getEvents().remove(eventIndexToDelete);
                 }
@@ -265,14 +202,7 @@ public class EventViewerController implements ActionListener {
                 eventManager.modelModified();
                 break;
             case "addItem":
-                String selectedText = "";
-                if (eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedText = eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                if (eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText() != null) {
-                    selectedText = eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().getSelectedText().trim();
-                }
-                int eventIndex = eventManager.getSelectedEvent(selectedText);
+                int eventIndex = eventManager.getSelectedEvent(eventManager.getTextUserSelects());
                 if (eventIndex != -1) {
                     JTextField startTimeInputField = new JTextField();
                     JTextField itemTitleInputField = new JTextField();
