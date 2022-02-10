@@ -31,12 +31,14 @@ public class TextAreaPanel extends JPanel {
     public TextAreaPanel() {
         this.setLayout(new BorderLayout());
         this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
+        this.textAreaPanel.setEditable(false);
         this.add(textAreaScrollPane);
     }
     
     public TextAreaPanel(String eventText) {
         this.setLayout(new BorderLayout());
         this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
+        this.textAreaPanel.setEditable(false);
         this.textAreaPanel.setText(eventText);
         this.add(textAreaScrollPane);
     }

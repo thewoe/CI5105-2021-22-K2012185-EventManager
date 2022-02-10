@@ -15,6 +15,7 @@ import com.tugoflaherty.eventmanager.view.EventViewer;
 public class EventManagerController {
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
+        eventManager.initialiseModelDeleteOrganisers();
         eventManager.loadState();
         EventViewer eventViewer = EventViewer.getInstance();
         eventManager.modelModified();

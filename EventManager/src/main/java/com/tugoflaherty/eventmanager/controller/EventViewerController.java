@@ -30,6 +30,17 @@ public class EventViewerController implements ActionListener {
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
+            case "newFile":
+                Object[] newFileOptions = {"Keep Organisers", "Clear Organisers"};
+                int newFileOption = JOptionPane.showOptionDialog(eventViewer, "Keep current stored organisers or clear organisers?", "Keep or Clear Organisers", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, newFileOptions, newFileOptions[0]);
+                if (newFileOption == JOptionPane.YES_OPTION) {
+                    eventManager.initialiseModelKeepOrganisers();
+                }
+                else if (newFileOption == JOptionPane.NO_OPTION) {
+                    eventManager.initialiseModelDeleteOrganisers();
+                }
+                eventManager.modelModified();
+                break;
             case "eventTitleDescending":
                 eventManager.sortEventsByEventTitleDescending();
                 eventManager.modelModified();
@@ -151,7 +162,7 @@ public class EventViewerController implements ActionListener {
                     Object[] setOrganiserInputFields = {"Organiser:", setOrganisersComboBox};
                     int setOrganiser = JOptionPane.showConfirmDialog(eventViewer, setOrganiserInputFields, "Set Event Organiser", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                     if (setOrganiser == JOptionPane.OK_OPTION) {
-                        int setOrganiserIndex = setOrganisersComboBox.getSelectedIndex();
+                        int setOrganiserIndex = setOrganisersComboBox.getSelectedIndex() -1;
                         if (setOrganiserIndex != 0) {
                             eventManager.associateOrganiserToEvent(eventIndexToSetOrganiser, setOrganiserIndex);
                         }
@@ -187,7 +198,14 @@ public class EventViewerController implements ActionListener {
                 }
                 int organiserIndexToDelete = eventManager.getSelectedOrganiser(selectedOrganiserTextToDelete);
                 if (organiserIndexToDelete != -1) {
-                eventManager.getOrganisers().remove(organiserIndexToDelete);
+                    for (int i=0; i<eventManager.getEvents().size(); i++) {
+                        for (int j=0; j<eventManager.getOrganisers().size(); j++) {
+                            if (eventManager.getOrganisers().get(j).equals(eventManager.getEvents().get(i).getOrganiser())) {
+                                eventManager.getEvents().get(i).setOrganiser(null);
+                            }
+                        }
+                    }
+                    eventManager.getOrganisers().remove(organiserIndexToDelete);
                 }
                 eventManager.modelModified();
                 break;
@@ -318,7 +336,7 @@ public class EventViewerController implements ActionListener {
             case "openFile":
                 int continueOpeningFile = JOptionPane.showConfirmDialog(eventViewer, "Opening a file will erase all Organisers, Events, and Event Items unless they have already been saved. Continue?", "Continue to Open File", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (continueOpeningFile == JOptionPane.YES_OPTION) {
-                    eventManager.initialiseManager();
+                    eventManager.initialiseModelDeleteOrganisers();
                     JFileChooser openFileChooser = new JFileChooser();
                     FileNameExtensionFilter openFileFilter = new FileNameExtensionFilter("CSV Files", "csv");
                     openFileChooser.setFileFilter(openFileFilter);

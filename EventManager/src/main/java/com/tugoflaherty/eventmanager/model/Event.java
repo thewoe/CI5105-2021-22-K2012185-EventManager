@@ -281,7 +281,7 @@ public class Event implements Comparable<Event>, Serializable {
     private static class ByEventTitle implements Comparator<Event>{
         @Override
         public int compare(Event event1, Event event2) {
-            return event1.getTitle().compareTo(event2.getTitle());
+            return event1.getTitle().compareToIgnoreCase(event2.getTitle());
         }
     }
     

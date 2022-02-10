@@ -46,6 +46,7 @@ public class EventViewer extends JFrame {
     private JMenu editMenu = new JMenu("Edit");
     private JMenu viewMenu = new JMenu("View");
     private JMenu sortByMenu = new JMenu("Sort By");
+    private JMenuItem newFile = new JMenuItem("New File");
     private JMenuItem openFile = new JMenuItem("Open File");
     private JMenuItem saveFile = new JMenuItem("Save File");
     private JMenuItem newEvent = new JMenuItem("New Event");
@@ -86,6 +87,9 @@ public class EventViewer extends JFrame {
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         menuBar.add(viewMenu);
+        newFile.setActionCommand("newFile");
+        newFile.addActionListener(eventHandler);
+        fileMenu.add(newFile);
         openFile.setActionCommand("openFile");
         openFile.addActionListener(eventHandler);
         fileMenu.add(openFile);

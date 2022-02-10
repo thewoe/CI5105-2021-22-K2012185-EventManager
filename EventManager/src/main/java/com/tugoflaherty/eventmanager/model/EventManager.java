@@ -206,7 +206,7 @@ public class EventManager implements Serializable {
                 if (!title.equals("")) {
                     selectedEvent.setTitle(title);
                 }
-                if (!dateTime.equals("")) {
+                if (!dateTime.equals("T")) {
                     selectedEvent.setDateTime(dateTime);
                 }
                 if (!location.equals("")) {
@@ -344,12 +344,6 @@ public class EventManager implements Serializable {
         }	  		 	  	 	        	     		  
     }
     
-    public void initialiseManager() {
-        this.getOrganisers().clear();
-        this.getEvents().clear();
-        this.getItems().clear();
-    }
-    
     public void saveState(String lastSavedPath) {
         try(BufferedWriter bWriter = new BufferedWriter(new FileWriter("_EventManagerLastOpenedState_.csv"))) {
             if (!lastSavedPath.isBlank()) {
@@ -395,16 +389,22 @@ public class EventManager implements Serializable {
             }
             String dateTime = currentEvent.getDateTime().toString();
             String[] dateTimeArray = dateTime.split("T");
-            textViewString = textViewString + " at " + dateTimeArray[0] + " at " + dateTimeArray[1] + " in " + currentEvent.getLocation() + " with agenda: ";
-            for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
-                Item currentItem = this.getEvents().get(i).getItems().get(j);
-                textViewString = textViewString + currentItem.getStartTime().toString() + " " + currentItem.getItemTitle();
-                if (j != this.getEvents().get(i).getItems().size() - 1) {
-                    textViewString = textViewString + ", ";
+            textViewString = textViewString + " at " + dateTimeArray[0] + " at " + dateTimeArray[1] + " in " + currentEvent.getLocation();
+            if (!currentEvent.getItems().isEmpty()) {
+                textViewString = textViewString + " with agenda: ";
+                for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
+                    Item currentItem = this.getEvents().get(i).getItems().get(j);
+                    textViewString = textViewString + currentItem.getStartTime().toString() + " - " + currentItem.getItemTitle();
+                    if (j != this.getEvents().get(i).getItems().size() - 1) {
+                        textViewString = textViewString + ", ";
+                    }
+                    else if (j == this.getEvents().get(i).getItems().size() - 1) {
+                        textViewString = textViewString + System.lineSeparator();
+                    }
                 }
-                else if (j == this.getEvents().get(i).getItems().size() - 1) {
-                    textViewString = textViewString + System.lineSeparator();
-                }
+            }
+            else {
+                textViewString = textViewString + System.lineSeparator();
             }
         }
         return textViewString;
@@ -422,12 +422,17 @@ public class EventManager implements Serializable {
             String dateTime = currentEvent.getDateTime().toString();
             String[] dateTimeArray = dateTime.split("T");
             hierarchalViewString = hierarchalViewString + " at " + dateTimeArray[0] + " at " + dateTimeArray[1] + " in " + currentEvent.getLocation() + System.lineSeparator();
-            for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
-                Item currentItem = this.getEvents().get(i).getItems().get(j);
-                hierarchalViewString = hierarchalViewString + "    " + currentItem.getStartTime().toString() + " " + currentItem.getItemTitle() + System.lineSeparator();
-                if (j == this.getEvents().get(i).getItems().size() - 1) {
-                    hierarchalViewString = hierarchalViewString + System.lineSeparator();
+            if (!currentEvent.getItems().isEmpty()) {
+                for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
+                    Item currentItem = this.getEvents().get(i).getItems().get(j);
+                    hierarchalViewString = hierarchalViewString + "    " + currentItem.getStartTime().toString() + " - " + currentItem.getItemTitle() + System.lineSeparator();
+                    if (j == this.getEvents().get(i).getItems().size() - 1) {
+                        hierarchalViewString = hierarchalViewString + System.lineSeparator();
+                    }
                 }
+            }
+            else {
+                hierarchalViewString = hierarchalViewString + System.lineSeparator();
             }
         }
         return hierarchalViewString;
@@ -460,21 +465,23 @@ public class EventManager implements Serializable {
     }
     
     public int[] getSelectedItem(String selectedText) {
-        int[] selectedItemLocation = new int[1];
+        int[] selectedItemLocation = new int[2];
         selectedItemLocation[0] = -1;
         selectedItemLocation[1] = -1;
         String searchableText = selectedText.trim();
-        String[] itemDetails = searchableText.split(" ");
-        Item comparableItem = new Item(itemDetails[0], itemDetails[1]);
+        String[] itemDetails = searchableText.split("-");
+        System.out.println(itemDetails[0]+itemDetails[1]);
+        Item comparableItem = new Item(itemDetails[0].trim(), itemDetails[1].trim());
         for (int i=0; i<this.getEvents().size(); i++) {
             for (int j=0; j<this.getEvents().get(i).getItems().size(); j++) {
                 if (comparableItem.equals(this.getEvents().get(i).getItems().get(j))) {
                     selectedItemLocation[0] = i;
                     selectedItemLocation[1] = j;
-                    break;
+                    return selectedItemLocation;
                 }
             }
         }
+        System.out.println(selectedItemLocation[0] + " " + selectedItemLocation[1]);
         return selectedItemLocation;
     }
     
@@ -535,5 +542,16 @@ public class EventManager implements Serializable {
         EventViewer eventViewer = EventViewer.getInstance();
         eventViewer.getTabPanel().getTextAreaPanel().getTextAreaPanel().setText(this.textViewData());
         eventViewer.getTabPanel().getHierarchalPanel().getTextAreaPanel().setText(this.hierarchalViewData());
+    }
+    
+    public void initialiseModelKeepOrganisers() {
+        this.getEvents().clear();
+        this.getItems().clear();
+    }
+    
+    public void initialiseModelDeleteOrganisers() {
+        this.getEvents().clear();
+        this.getItems().clear();
+        this.getOrganisers().clear();
     }
 }
