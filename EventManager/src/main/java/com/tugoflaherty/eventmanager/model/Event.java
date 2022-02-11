@@ -5,7 +5,6 @@
  */
 package com.tugoflaherty.eventmanager.model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -17,14 +16,22 @@ import java.util.Objects;
  *
  * @author tugoflaherty
  */
-public class Event implements Comparable<Event>, Serializable {
+public class Event implements Comparable<Event> {
     
     private String title;
     private Organiser organiser;
     private LocalDateTime dateTime;
     private String location;
     private List<Item> items = new ArrayList();
+
+    /**
+     * public static Comparator object of type Event, for sorting events by date and time
+     */
     public static Comparator<Event> BY_DATE = new ByDateTime();
+
+    /**
+     * public static Comparator object of type Event, for sorting events by title
+     */
     public static Comparator<Event> BY_EVENTTITLE = new ByEventTitle();
 
     /**
@@ -216,10 +223,21 @@ public class Event implements Comparable<Event>, Serializable {
         this.setLocation(location);
     }
     
+    /**
+     * This method adds an item object of type Item to the items ArrayList of type Item of an Event object
+     * It returns no values
+     * @param item This is the item object of type Item of the item to be added to the Event ArrayList
+     */
     public void addItem(Item item) {
         this.getItems().add(item);
     }
     
+    /**
+     * This method overrides the toString() method for an Event object, returning the Event object's attributes as a String in a human-readable format
+     * It does not have any parameters
+     * The method return value depends on whether or not an Event object organiser attribute of type Organiser is null
+     * @return This returns the Event object's attributes as a human-readable format of type String
+     */
     @Override
     public String toString() {
         if (this.getOrganiser() != null) {
@@ -229,11 +247,21 @@ public class Event implements Comparable<Event>, Serializable {
 
     }
     
+    /**
+     * This method overrides the compareTo() method for an Event object, receiving an event object of type Event and returning a boolean value depending on if the events are equal or not based on the event title
+     * @param event This is the event object of type Event being passed to the method to be compared
+     * @return This is the return value of type boolean, true if the passed event is equal to the current event, otherwise false, based on the event title
+     */
     @Override
     public int compareTo(Event event) {
         return title.compareTo(event.getTitle());
     }
 
+    /**
+     * This method overrides the hashCode() method for an Event object, generating a hashCode for the Event object based on its title, organiser, dateTime, and location attribute values, and returning the hashCode
+     * It does not have any parameters
+     * @return This is the return value of type int, generated based on the Event object's title, organiser, dateTime, and location attribute values
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -244,6 +272,11 @@ public class Event implements Comparable<Event>, Serializable {
         return hash;
     }
 
+    /**
+     * This method overrides the equals() method for an Event object, receiving an Object and checking if the object is equal to the Event object, returning a boolean of true if it is, otherwise false
+     * @param obj This is the object of type Object to be compared to the Event instance
+     * @return This is the return value of type boolean, true if the object is equal to the Event instance, otherwise false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -284,6 +317,4 @@ public class Event implements Comparable<Event>, Serializable {
             return event1.getTitle().compareToIgnoreCase(event2.getTitle());
         }
     }
-    
-    
 }

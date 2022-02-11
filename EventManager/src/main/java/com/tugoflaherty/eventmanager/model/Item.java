@@ -5,7 +5,6 @@
  */
 package com.tugoflaherty.eventmanager.model;
 
-import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
@@ -15,10 +14,14 @@ import java.util.Objects;
  *
  * @author tugoflaherty
  */
-public class Item implements Comparable<Item>, Serializable {
+public class Item implements Comparable<Item> {
     
     private LocalTime startTime;
     private String itemTitle;
+
+    /**
+     * public static Comparator object of type Item, for sorting items by date and time
+     */
     public static Comparator<Item> BY_TIME = new Item.ByStartTime();
 
     /**
@@ -92,16 +95,31 @@ public class Item implements Comparable<Item>, Serializable {
         this.setItemTitle(itemTitle);
     }
     
+    /**
+     * This method overrides the toString() method for an Item object, returning the Item object's attributes as a String in a human-readable format
+     * It does not have any parameters
+     * @return This returns the Item object's attributes as a human-readable format of type String
+     */
     @Override
     public String toString() {
         return "Item{" + "title=" + this.getItemTitle() + "time=" + this.getStartTime().toString() + "}";
     }
     
+    /**
+     * This method overrides the compareTo() method for an Item object, receiving an item object of type Item and returning a boolean value depending on if the items are equal or not based on the item start time
+     * @param item This is the item object of type Item being passed to the method to be compared
+     * @return This is the return value of type boolean, true if the passed item is equal to the current item, otherwise false, based on the item start time
+     */
     @Override
     public int compareTo(Item item) {
         return startTime.compareTo(item.getStartTime());
     }
 
+    /**
+     * This method overrides the hashCode() method for an Item object, generating a hashCode for the Item object based on its startTime and itemTitle attribute values, and returning the hashCode
+     * It does not have any parameters
+     * @return This is the return value of type int, generated based on the Item object's startTime and itemTitle attribute values
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -110,6 +128,11 @@ public class Item implements Comparable<Item>, Serializable {
         return hash;
     }
 
+    /**
+     * This method overrides the equals() method for an Item object, receiving an Object and checking if the object is equal to the Item object, returning a boolean of true if it is, otherwise false
+     * @param obj This is the object of type Object to be compared to the Item instance
+     * @return This is the return value of type boolean, true if the object is equal to the Item instance, otherwise false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -137,5 +160,4 @@ public class Item implements Comparable<Item>, Serializable {
             return item1.getStartTime().compareTo(item2.getStartTime());
         }
     }
-    
 }

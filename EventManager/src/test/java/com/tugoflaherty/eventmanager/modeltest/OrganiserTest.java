@@ -13,7 +13,13 @@ import com.tugoflaherty.eventmanager.model.Organiser;
  */
 public class OrganiserTest {
     
-    public void createOrganisers() {
+    /**
+     * This is a test method to create a series of five hard-coded Organiser objects, testing that Organiser objects can be instantiated
+     * Checks appropriate Organiser constructor and attributes are set correctly to allow a new Organiser to be instantiated
+     * Takes in no parameters
+     * Returns no values
+     */
+    public static void createOrganisers() {
         Organiser jamesDenholmPrice = new Organiser("James","Denholm-Price");
         Organiser davidLivingstone = new Organiser("David","Livingstone");
         Organiser ahmedShihab = new Organiser("Ahmed","Shihab");
@@ -21,7 +27,14 @@ public class OrganiserTest {
         Organiser graemeJones = new Organiser("Graeme","Jones");
     }
     
-    public void testOrganiserCreation() {
+    /**
+     * This is a test method to create a series of five hard-coded Organiser objects, testing that Organiser objects can be instantiated
+     * Checks appropriate Organiser constructor and attributes are set correctly to allow a new Organiser to be instantiated
+     * Prints out Organiser object attributes to console to show that the Organiser objects have been correctly instantiated
+     * Takes in no parameters
+     * Returns no values
+     */
+    public static void testOrganiserCreation() {
         Organiser jamesDenholmPrice = new Organiser("James","Denholm-Price");
         Organiser davidLivingstone = new Organiser("David","Livingstone");
         Organiser ahmedShihab = new Organiser("Ahmed","Shihab");

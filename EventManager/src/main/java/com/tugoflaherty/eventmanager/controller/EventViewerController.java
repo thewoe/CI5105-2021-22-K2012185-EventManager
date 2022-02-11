@@ -21,9 +21,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author tugso
+ * @author tugoflaherty
  */
 public class EventViewerController implements ActionListener {
+
+    /**
+     * This method is an override of the actionPerformed method in ActionListener
+     * It determines the option selected in the EventViewer user interface and calls the relevant method
+     * It returns no values
+     * @param ae This is an ActionEvent parameter to determine which  methods to run when the user interaction happens
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         System.out.println(ae.getActionCommand()); //(un)comment for testing JButtons/JMenuItems

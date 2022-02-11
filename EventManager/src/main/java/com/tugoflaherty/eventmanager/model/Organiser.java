@@ -62,11 +62,21 @@ public class Organiser {
         this.setLastName(lastName);
     }
     
+    /**
+     * This method overrides the toString() method for an Organiser object, returning the Organiser object's attributes as a String in a human-readable format
+     * It does not have any parameters
+     * @return This returns the Organiser object's attributes as a human-readable format of type String
+     */
     @Override
     public String toString() {
         return this.getFirstName() + " " + this.getLastName();
     }
 
+    /**
+     * This method overrides the hashCode() method for an Organiser object, generating a hashCode for the Organiser object based on its firstName and lastName attribute values, and returning the hashCode
+     * It does not have any parameters
+     * @return This is the return value of type int, generated based on the Organiser object's firstName and lastName attribute values
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -75,6 +85,11 @@ public class Organiser {
         return hash;
     }
 
+    /**
+     * This method overrides the equals() method for an Organiser object, receiving an Object and checking if the object is equal to the Organiser object, returning a boolean of true if it is, otherwise false
+     * @param obj This is the object of type Object to be compared to the Organiser instance
+     * @return This is the return value of type boolean, true if the object is equal to the Organiser instance, otherwise false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -95,6 +110,4 @@ public class Organiser {
         }
         return true;
     }
-    
-    
 }

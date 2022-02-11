@@ -7,7 +7,7 @@ package com.tugoflaherty.eventmanager.controllertest;
 
 /**
  *
- * @author tugso
+ * @author tugoflaherty
  */
 public class MainTest {
     

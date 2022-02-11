@@ -12,21 +12,19 @@ package com.tugoflaherty.eventmanager.modeltest;
 public class MainTest {
 
     /**
-     *
-     * @param args
+     * This is a main method for testing purposes, allowing the calling of test methods, which can be uncommented as necessary for running to test application model
+     * @param args This is the main method String Array of arguments parameter
      */
     public static void main(String[] args) {
         
-        //instantiation of all test classes
+        //Uncomment out below tests as required to run. Application passes all tests as of 10/02/2022.
         
-        //EventManagerTest eventManagerTest = new EventManagerTest();
-        //EventTest eventTest = new EventTest();
-        //ItemTest itemTest = new ItemTest();
-        //OrganiserTest organiserTest = new OrganiserTest();
-        
-        //itemTest.testItemCreation();
-        //organiserTest.testOrganiserCreation();
-        //eventTest.testEventCreation();
+        //ItemTest.createItems();
+        //OrganiserTest.createOrganisers();
+        //EventTest.createEvents();
+        //ItemTest.testItemCreation();
+        //OrganiserTest.testOrganiserCreation();
+        //EventTest.testEventCreation();
         //System.out.println(EventManagerTest.testSingletonEventManagerCreation());
         //System.out.println(EventManagerTest.testEmptyEventManagerEventList());
         //System.out.println(EventManagerTest.testEmptyEventManagerItemList());

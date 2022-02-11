@@ -17,7 +17,13 @@ import java.util.List;
  */
 public class EventTest {
 
-    public void createEvents() {
+    /**
+     *This is a test method to create a series of eight hard-coded Event objects, testing that Event objects can be instantiated
+     * Checks appropriate Event constructor and attributes are set correctly to allow a new Event to be instantiated
+     * Takes in no parameters
+     * Returns no values
+     */
+    public static void createEvents() {
         Organiser jamesDenholmPrice = new Organiser("James", "DenholmPrice");
         Organiser davidLivingstone = new Organiser("David", "Livingstone");
         List<Item> musicConcertItems = new ArrayList();
@@ -39,7 +45,14 @@ public class EventTest {
         Event movieFilming = new Event("Film New Blockbuster Movie", "12:00", "Bristol");
     }
 
-    public void testEventCreation() {
+    /**
+     * This is a test method to create a series of eight hard-coded Event objects, testing that Event objects can be instantiated
+     * Checks appropriate Event constructor and attributes are set correctly to allow a new Event to be instantiated
+     * Prints out Event object attributes to console to show that the Event objects have been correctly instantiated
+     * Takes in no parameters
+     * Returns no values
+     */
+    public static void testEventCreation() {
         Organiser jamesDenholmPrice = new Organiser("James", "DenholmPrice");
         Organiser davidLivingstone = new Organiser("David", "Livingstone");
         List<Item> musicConcertItems = new ArrayList();

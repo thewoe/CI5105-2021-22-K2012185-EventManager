@@ -10,9 +10,15 @@ import com.tugoflaherty.eventmanager.view.EventViewer;
 
 /**
  *
- * @author tugso
+ * @author tugoflaherty
  */
 public class EventManagerController {
+
+    /**
+     * This is the main method into the application when the application is run, creating instances of EventManager and EventViewer
+     * It initialises the model, loads in the previous closed state and calls the viewer to update based on this loaded in file
+     * @param args The main String Array arguments parameter used for the initialisation of the application in the main method
+     */
     public static void main(String[] args) {
         EventManager eventManager = EventManager.getInstance();
         eventManager.initialiseModelDeleteOrganisers();

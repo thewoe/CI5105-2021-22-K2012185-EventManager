@@ -9,9 +9,14 @@ import com.tugoflaherty.eventmanager.view.EventViewer;
 
 /**
  *
- * @author tugso
+ * @author tugoflaherty
  */
 public class MainTest {
+
+    /**
+     * This is a test main method to create a new EventViewer instance to test the eventViewer has appropriate Swing components added correctly
+     * @param args This is a String Array argument parameter value for the main method
+     */
     public static void main(String[] args) {
         EventViewer eventViewer = EventViewer.getInstance();
     }

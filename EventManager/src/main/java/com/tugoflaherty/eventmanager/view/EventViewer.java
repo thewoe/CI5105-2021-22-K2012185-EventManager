@@ -24,22 +24,42 @@ public class EventViewer extends JFrame {
     private ButtonPanel buttonPanel = new ButtonPanel();
     private TabPanel tabPanel = new TabPanel();
 
+    /**
+     * This method is a getter to return the buttonPanel attribute as type ButtonPanel
+     * It takes in no parameters
+     * @return This returns the buttonPanel of type ButtonPanel
+     */
     public ButtonPanel getButtonPanel() {
         return buttonPanel;
     }
 
+    /**
+     * This method is a setter to set the value of the buttonPanel attribute using a value of type ButtonPanel
+     * It does not return a value
+     * @param buttonPanel This is the value of the buttonPanel attribute to be set of type ButtonPanel
+     */
     public void setButtonPanel(ButtonPanel buttonPanel) {
         this.buttonPanel = buttonPanel;
     }
 
+    /**
+     * This method is a getter to return the tabPanel attribute as type TabPanel
+     * It takes in no parameters
+     * @return This returns the tabPanel of type TabPanel
+     */
     public TabPanel getTabPanel() {
         return tabPanel;
     }
 
+    /**
+     * This method is a setter to set the value of the tabPanel attribute using a value of type TabPanel
+     * It does not return a value
+     * @param tabPanel This is the value of the tabPanel attribute to be set of type TabPanel
+     */
     public void setTabPanel(TabPanel tabPanel) {
         this.tabPanel = tabPanel;
     }
-    //MIGRATE TO PANEL private JLabel eventViewerTitle = new JLabel("Event Viewer");
+    
     private JMenuBar menuBar = new JMenuBar();
     private JMenu fileMenu = new JMenu("File");
     private JMenu editMenu = new JMenu("Edit");
@@ -65,6 +85,12 @@ public class EventViewer extends JFrame {
     private JMenuItem eventTitleAscending = new JMenuItem("Event Title (Ascending)");
     private JMenuItem eventTitleDescending = new JMenuItem("Event Title (Descending)");
     
+    /**
+     * This method uses a Singleton Pattern to create an instance of EventViewer if one does not already exist, but if one already exists, return that instance
+     * Ensures only one instance of EventViewer can be instantiated throughout the application
+     * This does not take any parameters
+     * @return This returns the singular instance of an EventViewer object
+     */
     public static EventViewer getInstance() {
         if (INSTANCE==null) {
             INSTANCE = new EventViewer();
@@ -148,11 +174,9 @@ public class EventViewer extends JFrame {
         eventTitleDescending.setActionCommand("eventTitleDescending");
         eventTitleDescending.addActionListener(eventHandler);
         sortByMenu.add(eventTitleDescending);
-        //MIGRATE TO PANEL this.add(eventViewerTitle, BorderLayout.NORTH);
         this.add(menuBar, BorderLayout.NORTH);
         this.add(buttonPanel, BorderLayout.SOUTH);
         this.add(tabPanel, BorderLayout.CENTER);
         this.setVisible(true);
     }
-    
 }
