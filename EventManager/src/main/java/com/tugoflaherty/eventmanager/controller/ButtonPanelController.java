@@ -30,7 +30,7 @@ public class ButtonPanelController implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        System.out.println(ae.getActionCommand()); //(un)comment for testing JButtons/JMenuItems
+        //System.out.println(ae.getActionCommand()); //(un)comment for testing JButtons/JMenuItems
         EventManager eventManager = EventManager.getInstance();
         EventViewer eventViewer = EventViewer.getInstance();
         switch (ae.getActionCommand()) {
