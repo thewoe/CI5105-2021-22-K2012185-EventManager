@@ -142,7 +142,7 @@ public class EventViewerController implements ActionListener {
                     int setOrganiser = JOptionPane.showConfirmDialog(eventViewer, setOrganiserInputFields, "Set Event Organiser", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                     if (setOrganiser == JOptionPane.OK_OPTION) {
                         int setOrganiserIndex = setOrganisersComboBox.getSelectedIndex() -1;
-                        if (setOrganiserIndex != 0) {
+                        if (setOrganiserIndex >= 0) {
                             eventManager.associateOrganiserToEvent(eventIndexToSetOrganiser, setOrganiserIndex);
                         }
                         else {
