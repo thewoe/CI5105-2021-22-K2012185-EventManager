@@ -22,9 +22,9 @@ public class MainTest {
         //ItemTest.createItems();
         //OrganiserTest.createOrganisers();
         //EventTest.createEvents();
-        //ItemTest.testItemCreation();
-        //OrganiserTest.testOrganiserCreation();
-        //EventTest.testEventCreation();
+        //System.out.println(ItemTest.testItemCreation());
+        //System.out.println(OrganiserTest.testOrganiserCreation());
+        //System.out.println(EventTest.testEventCreation());
         //System.out.println(EventManagerTest.testSingletonEventManagerCreation());
         //System.out.println(EventManagerTest.testEmptyEventManagerEventList());
         //System.out.println(EventManagerTest.testEmptyEventManagerItemList());
@@ -45,6 +45,7 @@ public class MainTest {
         //System.out.println(EventManagerTest.testAddItemToEventManagerItemListContains());
         //System.out.println(EventManagerTest.testAddItemToEventManagerItemListSize());
         //System.out.println(EventManagerTest.testDeleteItemFromEventManagerItemListDoesNotContain());
+        //System.out.println(EventManagerTest.testDeleteItemFromEventManagerItemListSize());
         //System.out.println(EventManagerTest.testDeleteEventToEventManagerItemListSize());
         //System.out.println(EventManagerTest.testAssociateOrganiserToEventNull());
         //System.out.println(EventManagerTest.testAssociateOrganiserToEventContains());

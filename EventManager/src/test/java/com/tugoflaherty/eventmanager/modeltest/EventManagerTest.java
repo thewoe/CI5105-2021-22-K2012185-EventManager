@@ -294,6 +294,24 @@ public class EventManagerTest {
     }
     
     /**
+     * This method tests that when an Item is deleted from the EventManager items ArrayList, the ArrayList size is reduced by one to reflect that one item has been deleted
+     * This method takes in no parameter values
+     * @return This returns boolean true if the EventManager items ArrayList size has reduced by one after an Item object has been deleted, otherwise false
+     */
+    public static boolean testDeleteItemFromEventManagerItemListSize() {
+        EventManager eventManager = EventManager.getInstance();
+        eventManager.addItem("9:00","Wake up");
+        eventManager.addItem("10:00","Catch the bus");
+        eventManager.addItem("11:00","Arrive at Kingston University");
+        int previousSize = eventManager.getItems().size();
+        eventManager.deleteItem(1);
+        if (eventManager.getItems().size() == previousSize - 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * This method tests that when an Item is deleted from the EventManager items ArrayList, the ArrayList size reduces by one
      * This method takes in no parameter values
      * @return This returns boolean true if the EventManager items ArrayList size reduces by one when an Item object is deleted, otherwise false
